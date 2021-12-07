@@ -16,11 +16,7 @@ namespace HoaYeuThuong
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-<<<<<<< Updated upstream
             Application.Run(new MDForm());
-=======
-            Application.Run(new NTForm());
->>>>>>> Stashed changes
         }
     }
 }
