@@ -47,6 +47,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GQForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GQForm.Designer.cs">
+      <DependentUpon>GQForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MDForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +61,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GQForm.resx">
+      <DependentUpon>GQForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MDForm.resx">
       <DependentUpon>MDForm.cs</DependentUpon>
     </EmbeddedResource>
