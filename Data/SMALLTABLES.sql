@@ -116,10 +116,10 @@ INSERT INTO DOITAC (TenDT, SdtDT, DiaChiDT)
 VALUES(N'Paris Gateaux', '0328300388', N'237 Bùi Thị Xuân, Q.5, TP.HCM ')
 
 INSERT INTO DOITAC (TenDT, SdtDT, DiaChiDT)
-VALUES(N'Paris Baguette', '0866989432', N'369 Lý Chính Thắng, Q.10, TP.HCM ')
+VALUES(N'Shop trái cây xanh', '0866989432', N'369 Lý Chính Thắng, Q.10, TP.HCM ')
 
 INSERT INTO DOITAC (TenDT, SdtDT, DiaChiDT)
-VALUES(N'Givral Bakery', '0924673053', N'316 Nguyễn Siêu, Q.Bình Thạnh, TP.HCM ')
+VALUES(N'Vitamin Shop', '0924673053', N'316 Nguyễn Siêu, Q.Bình Thạnh, TP.HCM ')
 
 INSERT INTO DOITAC (TenDT, SdtDT, DiaChiDT)
 VALUES(N'Gia đình gấu bông', '0980907661', N'381 Huỳnh Thúc Kháng, Huyện Nhà Bè, TP.HCM ')
