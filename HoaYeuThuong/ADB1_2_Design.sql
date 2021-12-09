@@ -81,7 +81,7 @@ CREATE TABLE CHUDE (
   PRIMARY KEY (MaCD));
 CREATE TABLE DOITAC (
   MaDT     int IDENTITY NOT NULL, 
-  TenDT    nvarchar(20) NULL, 
+  TenDT    nvarchar(50) NULL, 
   SdtDT    char(10) NULL, 
   DiaChiDT nvarchar(100) NULL, 
   PRIMARY KEY (MaDT));
