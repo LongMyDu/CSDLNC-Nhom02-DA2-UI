@@ -34,7 +34,7 @@
             // 
             // Connect_Button
             // 
-            this.Connect_Button.Location = new System.Drawing.Point(118, 94);
+            this.Connect_Button.Location = new System.Drawing.Point(528, 566);
             this.Connect_Button.Name = "Connect_Button";
             this.Connect_Button.Size = new System.Drawing.Size(175, 67);
             this.Connect_Button.TabIndex = 0;
@@ -44,23 +44,23 @@
             // 
             // Disconnect_Button
             // 
-            this.Disconnect_Button.Location = new System.Drawing.Point(388, 208);
+            this.Disconnect_Button.Location = new System.Drawing.Point(736, 566);
             this.Disconnect_Button.Name = "Disconnect_Button";
             this.Disconnect_Button.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.Disconnect_Button.Size = new System.Drawing.Size(181, 73);
+            this.Disconnect_Button.Size = new System.Drawing.Size(225, 67);
             this.Disconnect_Button.TabIndex = 1;
             this.Disconnect_Button.Text = "Disconnect with DB";
             this.Disconnect_Button.UseVisualStyleBackColor = true;
             this.Disconnect_Button.Click += new System.EventHandler(this.DisconnectButton_Click);
             // 
-            // Form2
+            // MDForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1006, 662);
             this.Controls.Add(this.Disconnect_Button);
             this.Controls.Add(this.Connect_Button);
-            this.Name = "Form2";
+            this.Name = "MDForm";
             this.Text = "Form2";
             this.ResumeLayout(false);
 
