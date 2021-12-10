@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace HoaYeuThuong
 {
-    public partial class GQForm : Form
+    public partial class SearchSPQT : Form
     {
         // Connection string (@ represents this is a string)
         string strCon = @"Data Source=DESKTOP-MNUAD46\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
@@ -21,8 +21,10 @@ namespace HoaYeuThuong
         string searchText = "";
         int themeID = 0;
         int colorID = 0;
+        int moneyFrom = 0;
+        int moneyTo = 0;
 
-        public GQForm()
+        public SearchSPQT()
         {
             InitializeComponent();
         }
@@ -64,14 +66,37 @@ namespace HoaYeuThuong
 
             //set DataGridView control to read-only
             grdData.ReadOnly = true;
+            grdData.AutoGenerateColumns = false;
 
             //set the DataGridView control's data source/data table
             grdData.DataSource = ds.Tables[0];
+            grdData.Columns["MaSPQT"].DataPropertyName = "MaSPQT";
+            grdData.Columns["TenSPQT"].DataPropertyName = "TenSPQT";
+            grdData.Columns["ChuDe"].DataPropertyName = "CHUDEMaCD";
+            grdData.Columns["MieuTaSPQT"].DataPropertyName = "MieuTaSPQT";
+            grdData.Columns["GiaBan"].DataPropertyName = "GiaBan";
+            grdData.Columns["GiaBanSauGiam"].DataPropertyName = "GiaBanSauGiam";
+            grdData.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+
         }
 
         private void LoadMoney()
         {
+            List<string> moneyList = new List<string>();
+            moneyList.Add("--Giá tiền thấp nhất--");
+            for (int i = 1; i <= 20; i++)
+            {
+                moneyList.Add((i * 10000).ToString());
+            }    
+            MoneyFrom.DataSource = moneyList;
 
+            List<string> moneyList2 = new List<string>();
+            moneyList2.Add("--Giá tiền cao nhất--");
+            for (int i = 1; i <= 20; i++)
+            {
+                moneyList2.Add((i * 10000).ToString());
+            }
+            MoneyTo.DataSource = moneyList2;
         }
 
         private void ConnectDB()
@@ -128,6 +153,7 @@ namespace HoaYeuThuong
             LoadColor();
             LoadTheme();
             LoadAllSPQT();
+            LoadMoney();
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
@@ -169,6 +195,32 @@ namespace HoaYeuThuong
                 }
             }
 
+            if (moneyFrom != 0)
+            {
+                string minMoney = "SPQT.GiaBan >= " + moneyFrom.ToString();
+                if (String.Equals(condition, "WHERE"))
+                {
+                    condition = condition + " " + minMoney;
+                }
+                else
+                {
+                    condition = condition + " AND " + minMoney;
+                }
+            }
+
+            if (moneyTo != 0)
+            {
+                string maxMoney = "SPQT.GiaBan <= " + moneyTo.ToString();
+                if (String.Equals(condition, "WHERE"))
+                {
+                    condition = condition + " " + maxMoney;
+                }
+                else
+                {
+                    condition = condition + " AND " + maxMoney;
+                }
+            }
+
             if (!isJoin)
             {
                 query = @"SELECT *
@@ -191,9 +243,17 @@ namespace HoaYeuThuong
 
             //set DataGridView control to read-only
             grdData.ReadOnly = true;
+            grdData.AutoGenerateColumns = false;
 
             //set the DataGridView control's data source/data table
             grdData.DataSource = ds.Tables[0];
+            grdData.Columns["MaSPQT"].DataPropertyName = "MaSPQT";
+            grdData.Columns["TenSPQT"].DataPropertyName = "TenSPQT";
+            grdData.Columns["ChuDe"].DataPropertyName = "CHUDEMaCD";
+            grdData.Columns["MieuTaSPQT"].DataPropertyName = "MieuTaSPQT";
+            grdData.Columns["GiaBan"].DataPropertyName = "GiaBan";
+            grdData.Columns["GiaBanSauGiam"].DataPropertyName = "GiaBanSauGiam";
+            grdData.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
 
         private void SearchBar_TextChanged(object sender, EventArgs e)
@@ -210,7 +270,23 @@ namespace HoaYeuThuong
         {
             themeID = ThemeFilter.SelectedIndex;
         }
+
+        private void MoneyFrom_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            moneyFrom = MoneyFrom.SelectedIndex*10000;
+        }
+
+        private void MoneyTo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            moneyTo = MoneyTo.SelectedIndex*10000;
+        }
+
+        private void grdData_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (grdData.Columns[e.ColumnIndex].Name == "AddToCartButton")
+            {
+
+            }    
+        }
     }
 }
-
-

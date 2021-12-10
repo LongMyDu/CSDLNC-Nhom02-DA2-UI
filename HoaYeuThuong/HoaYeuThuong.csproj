@@ -47,11 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GQForm.cs">
+    <Compile Include="SearchSPQT.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GQForm.Designer.cs">
-      <DependentUpon>GQForm.cs</DependentUpon>
+    <Compile Include="SearchSPQT.Designer.cs">
+      <DependentUpon>SearchSPQT.cs</DependentUpon>
     </Compile>
     <Compile Include="MDForm.cs">
       <SubType>Form</SubType>
@@ -61,8 +61,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="GQForm.resx">
-      <DependentUpon>GQForm.cs</DependentUpon>
+    <EmbeddedResource Include="SearchSPQT.resx">
+      <DependentUpon>SearchSPQT.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MDForm.resx">
       <DependentUpon>MDForm.cs</DependentUpon>
