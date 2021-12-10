@@ -14,18 +14,90 @@ namespace HoaYeuThuong
 {
     public partial class Cart : Form
     {
-        List<SanPham> SpTrongGio;
-        SqlConnection sqlCon;
-        public Cart(SqlConnection sqlConn, HashSet<SanPham> GioHang)
+        
+        String sqlConnString;
+        public Cart(String sqlConnString, HashSet<SanPham> GioHang)
         {
             InitializeComponent();
-            SpTrongGio = GioHang.ToList();
 
-            GioHangView.DataSource = SpTrongGio;
-            sqlCon = sqlConn;
+            foreach (var SP in GioHang.ToList())
+            {
+                sanPhamBindingSource.Add(SP);
+            }
+
+            //sanPhamBindingSource.DataSource = SpTrongGio;
+            //GioHangView.DataSource = sanPhamBindingSource;
+
+            //Thêm 1 cột là số lượng
+            //GioHangView.Columns.Add("SL", "Số lượng");
+            //GioHangView.Columns["SL"].DefaultCellStyle.NullValue = "1";
+
+            //Thêm 1 cột là nút xóa
+            //DataGridViewButtonColumn col = new DataGridViewButtonColumn();
+            //col.UseColumnTextForButtonValue = true;
+            //col.Text = "Xóa sản phẩm";
+            //col.Name = "XoaSP";
+            //GioHangView.Columns.Add(col);
+
+            //GioHangView.Columns["MaSP"].Visible = false;
+
+            this.sqlConnString = sqlConnString;
+
+            HinhThucTTInput.SelectedIndex = 0;
         }
 
-        private bool Them_DDH()
+        private long TinhTongTien_SpTrongGio()
+        {
+            long TongTien = 0;
+            for (var i = 0; i < sanPhamBindingSource.List.Count; i++)
+            {
+                SanPham SP = (SanPham)sanPhamBindingSource.List[i];
+                int SoLuong = 1;
+                if (GioHangView.Rows[i].Cells["SL"].Value != null)
+                {
+                    SoLuong = int.Parse(GioHangView.Rows[i].Cells["SL"].Value.ToString());
+                }
+
+                TongTien += long.Parse(SP.GiaBan)*SoLuong;
+            }
+            return TongTien;
+        }
+
+        //Hàm thêm chi tiết đơn hàng dựa trên SPTrongGio, CHƯA catch Exception
+        private void Them_CTDDH(SqlConnection connection, SqlTransaction transaction, int MaDDH)
+        {
+
+            SqlCommand command = connection.CreateCommand();
+            command.Connection = connection;
+            command.Transaction = transaction;
+
+            for(var i = 0; i < sanPhamBindingSource.List.Count; i++)
+            {
+                SanPham SP = (SanPham)sanPhamBindingSource.List[i];
+                String SoLuong = GioHangView.Rows[i].Cells["SL"].Value.ToString();
+               
+                if (SP.LoaiSP == "Hoa tươi")
+                {
+                    command.CommandText =
+                    @"INSERT INTO Mua_HOATUOI(DONDATHANGMaDDH, HOATUOIMaHT)
+                    VALUES(@MaDDH, @MaSP)";
+                }
+                else
+                {
+                    command.CommandText =
+                    @"INSERT INTO Mua_SPQT(DONDATHANGMaDDH, SANPHAMQUATANGMaSPQT, DonGia, SoLuong)
+                    VALUES(@MaDDH, @MaSP, @DonGia, @SoLuong)";
+                }
+                
+                command.Parameters.AddWithValue("@MaDDH", MaDDH);
+                command.Parameters.AddWithValue("@MaSP", SP.MaSP);
+                command.Parameters.AddWithValue("@DonGia", SP.GiaBan);
+                command.Parameters.AddWithValue("@SoLuong", SoLuong);
+                command.ExecuteNonQuery();
+            }
+        }
+
+        private void Them_DDH()
         {
             String HoTenNM = HoTenNmInput.Text;
             String SdtNM = SdtNmInput.Text;
@@ -48,43 +120,107 @@ namespace HoaYeuThuong
             var cultureInfo = new CultureInfo("de-DE");
             var dateTime = DateTime.Parse(ThoiGianGiao, cultureInfo);
 
-            MessageBox.Show(dateTime.ToString());
-            SqlCommand insert_cmd = new SqlCommand((@"INSERT INTO DONDATHANG (TinhTrangDH, CHINHANHMaCN, HoTenNM, SdtNM, EmailNM, DiaChiNM, HoTenNN, SdtNN, SoNhaNN, QuanNN, ThanhPhoNN, ThoiGianGiao, HTThanhToan, PhiVanChuyen, TinhTrangTT)
-                                                      VALUES(N'Đã tiếp nhận', NULL, @HoTenNM, @SdtNM, @EmailNM, @DiaChiNM, @HoTenNN, @SdtNN, @SoNhaNN, @QuanNN, @ThanhPhoNN, @ThoiGianGiao, @HTThanhToan, @PhiVanChuyen, N'Chưa thanh toán')"), sqlCon);
-            insert_cmd.Parameters.AddWithValue("@HoTenNM", HoTenNM);
-            insert_cmd.Parameters.AddWithValue("@SdtNM", SdtNM);
-            insert_cmd.Parameters.AddWithValue("@EmailNM", EmailNM);
-            insert_cmd.Parameters.AddWithValue("@DiaChiNM", DiaChiNM);
-
-            insert_cmd.Parameters.AddWithValue("@HoTenNN", HoTenNN);
-            insert_cmd.Parameters.AddWithValue("@SoNhaNN", SoNhaNN);
-            insert_cmd.Parameters.AddWithValue("@SdtNN", SdtNN);
-            insert_cmd.Parameters.AddWithValue("@QuanNN", QuanNN);
-            insert_cmd.Parameters.AddWithValue("@ThanhPhoNN", ThanhPhoNN);
-            insert_cmd.Parameters.AddWithValue("@ThoiGianGiao", dateTime);
-            insert_cmd.Parameters.AddWithValue("@HTThanhToan", HTThanhToan);
-            insert_cmd.Parameters.AddWithValue("@PhiVanChuyen", PhiVanChuyen);
-
-
-            int row_affected = insert_cmd.ExecuteNonQuery();
-            if (row_affected == 0)
+            using (SqlConnection connection = new SqlConnection(sqlConnString))
             {
-                MessageBox.Show("Đã xảy ra lỗi! Không thể thêm đơn hàng.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-            else
-            {
-                MessageBox.Show("Đặt hàng thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return true;
+                connection.Open();
+
+                SqlCommand insert_cmd = connection.CreateCommand();
+                SqlTransaction transaction;
+
+                // Start a local transaction.
+                transaction = connection.BeginTransaction("InsertDDHTransaction");
+
+                insert_cmd.Connection = connection;
+                insert_cmd.Transaction = transaction;
+
+                try
+                {
+                    insert_cmd.CommandText =
+                    @"INSERT INTO DONDATHANG (TinhTrangDH, CHINHANHMaCN, HoTenNM, SdtNM, EmailNM, DiaChiNM, HoTenNN, SdtNN, SoNhaNN, QuanNN, ThanhPhoNN, ThoiGianGiao, HTThanhToan, PhiVanChuyen, TinhTrangTT)
+                    VALUES(N'Đã tiếp nhận', NULL, @HoTenNM, @SdtNM, @EmailNM, @DiaChiNM, @HoTenNN, @SdtNN, @SoNhaNN, @QuanNN, @ThanhPhoNN, @ThoiGianGiao, @HTThanhToan, @PhiVanChuyen, N'Chưa thanh toán'); SELECT SCOPE_IDENTITY();";
+
+                    insert_cmd.Parameters.AddWithValue("@HoTenNM", HoTenNM);
+                    insert_cmd.Parameters.AddWithValue("@SdtNM", SdtNM);
+                    insert_cmd.Parameters.AddWithValue("@EmailNM", EmailNM);
+                    insert_cmd.Parameters.AddWithValue("@DiaChiNM", DiaChiNM);
+
+                    insert_cmd.Parameters.AddWithValue("@HoTenNN", HoTenNN);
+                    insert_cmd.Parameters.AddWithValue("@SoNhaNN", SoNhaNN);
+                    insert_cmd.Parameters.AddWithValue("@SdtNN", SdtNN);
+                    insert_cmd.Parameters.AddWithValue("@QuanNN", QuanNN);
+                    insert_cmd.Parameters.AddWithValue("@ThanhPhoNN", ThanhPhoNN);
+                    insert_cmd.Parameters.AddWithValue("@ThoiGianGiao", dateTime);
+                    insert_cmd.Parameters.AddWithValue("@HTThanhToan", HTThanhToan);
+                    insert_cmd.Parameters.AddWithValue("@PhiVanChuyen", PhiVanChuyen);
+
+                    int newDDH = Convert.ToInt32(insert_cmd.ExecuteScalar());
+
+                    Them_CTDDH(connection, transaction, newDDH);
+                    transaction.Commit();
+                    MessageBox.Show("Đặt hàng thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Đã xảy ra lỗi! Không thể thêm đơn hàng.\n\n" + ex.ToString(), "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    try
+                    {
+                        transaction.Rollback();
+                    }
+                    catch (Exception ex2)
+                    {
+                    }
+                }
             }
         }
+        
+        //TIPS: Thêm các điều kiện ràng buộc thông tin vào hàm này
+        private bool KiemTra_ThongTinDatHang_HopLe()
+        {
+            for (var i = 0; i < sanPhamBindingSource.List.Count; i++)
+            {
+                String SoLuongStr = GioHangView.Rows[i].Cells["SL"].Value.ToString();
+                int SoLuongInt = 0;
+                if (int.TryParse(SoLuongStr, out SoLuongInt) == false)
+                {
+                    MessageBox.Show("Đã xảy ra lỗi! Số lượng của sản phẩm không hợp lệ.\n\n", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return false;
+                }
+            }
+            return true;
+        }
+
         private void DatHangButton_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Xác nhận đặt hàng?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             if (dr == DialogResult.Yes)
             {
-                Them_DDH();
+                if (KiemTra_ThongTinDatHang_HopLe())
+                    Them_DDH();
+            }
+        }
+
+        private void GioHangView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            TongTienLabel.Text = "Tổng tiền: " + TinhTongTien_SpTrongGio().ToString();
+        }
+
+        private void ThanhPhoNnInput_TextChanged(object sender, EventArgs e)
+        {
+            PhiVCLabel.Text = "Phí vận chuyển: 20000";
+        }
+
+        private void Cart_Load(object sender, EventArgs e)
+        {
+            TongTienLabel.Text = "Tổng tiền: " + TinhTongTien_SpTrongGio().ToString();
+        }
+
+        private void GioHangView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (GioHangView.Columns[e.ColumnIndex].Name == "XoaSP")
+            {
+                sanPhamBindingSource.RemoveCurrent();
+                TongTienLabel.Text = "Tổng tiền: " + TinhTongTien_SpTrongGio().ToString();
             }
         }
     }

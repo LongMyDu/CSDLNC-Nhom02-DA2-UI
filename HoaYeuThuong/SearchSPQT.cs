@@ -286,7 +286,7 @@ namespace HoaYeuThuong
                 String MaSpHienTai = grdData.Rows[e.RowIndex].Cells["MaSPQT"].Value.ToString();
                 String GiaBanSpHienTai = grdData.Rows[e.RowIndex].Cells["GiaBanSauGiam"].Value.ToString();
                 String TenSP = grdData.Rows[e.RowIndex].Cells["TenSPQT"].Value.ToString();
-                SpDuocThemVaoGio.Add(new SanPham() { MaSP = MaSpHienTai, GiaBan = GiaBanSpHienTai, TenSP = TenSP });
+                SpDuocThemVaoGio.Add(new SanPham() { MaSP = MaSpHienTai, GiaBan = GiaBanSpHienTai, TenSP = TenSP, LoaiSP="SPQT" });
 
                 //String temp = MaSpHienTai + GiaBanSpHienTai + TenSP + "\n\n";
                 //temp += String.Join(", ", SpDuocThemVaoGio[0].TenSP);

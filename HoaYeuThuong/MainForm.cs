@@ -48,6 +48,7 @@ namespace HoaYeuThuong
 
         private void GoToSPQT_Click(object sender, EventArgs e)
         {
+            // Mở form Search SPQT, nếu chưa tồn tại hoặc đã bị tắt thì tạo form mới
             if (SPQT_Form == null || SPQT_Form.IsDisposed == true)
             {
                 SPQT_Form = new SearchSPQT();
@@ -63,13 +64,16 @@ namespace HoaYeuThuong
                 return;
             }
 
+            // Thêm các sản phẩm đã được thêm vào giỏ lúc khách hàng mở SearchSPQT Form vào giỏ hàng chính 
             foreach (var SP in SPQT_Form.SpDuocThemVaoGio)
             {
                 GioHang.Add(SP);
             }
+
+            // Mở form Cart, nếu chưa tồn tại hoặc đã bị tắt thì tạo form mới
             if (GioHang_Form == null || GioHang_Form.IsDisposed == true)
             {
-                GioHang_Form = new Cart(sqlCon, GioHang);
+                GioHang_Form = new Cart(strCon, GioHang);
             }
             GioHang_Form.Show();
         }

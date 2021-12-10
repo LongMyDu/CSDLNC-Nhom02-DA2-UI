@@ -28,9 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GioHangView = new System.Windows.Forms.DataGridView();
+            this.sanPhamBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.DatHangButton = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.ThongTinLabel = new System.Windows.Forms.Label();
             this.HoTenNmInput = new System.Windows.Forms.TextBox();
             this.HoTenNmLabel = new System.Windows.Forms.Label();
@@ -63,17 +65,40 @@
             this.VoucherInput = new System.Windows.Forms.TextBox();
             this.PhiVCLabel = new System.Windows.Forms.Label();
             this.TongTienLabel = new System.Windows.Forms.Label();
+            this.maSPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tenSPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.giaBanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loaiSPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.XoaSP = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GioHangView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sanPhamBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // GioHangView
             // 
+            this.GioHangView.AllowUserToAddRows = false;
+            this.GioHangView.AutoGenerateColumns = false;
             this.GioHangView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GioHangView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.maSPDataGridViewTextBoxColumn,
+            this.tenSPDataGridViewTextBoxColumn,
+            this.giaBanDataGridViewTextBoxColumn,
+            this.SL,
+            this.loaiSPDataGridViewTextBoxColumn,
+            this.XoaSP});
+            this.GioHangView.DataSource = this.sanPhamBindingSource;
             this.GioHangView.Dock = System.Windows.Forms.DockStyle.Left;
             this.GioHangView.Location = new System.Drawing.Point(0, 0);
             this.GioHangView.Name = "GioHangView";
             this.GioHangView.Size = new System.Drawing.Size(454, 519);
             this.GioHangView.TabIndex = 0;
+            this.GioHangView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GioHangView_CellContentClick);
+            this.GioHangView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.GioHangView_CellValueChanged);
+            // 
+            // sanPhamBindingSource
+            // 
+            this.sanPhamBindingSource.DataSource = typeof(HoaYeuThuong.SanPham);
             // 
             // DatHangButton
             // 
@@ -85,15 +110,6 @@
             this.DatHangButton.Text = "Đặt hàng";
             this.DatHangButton.UseVisualStyleBackColor = true;
             this.DatHangButton.Click += new System.EventHandler(this.DatHangButton_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "label1";
             // 
             // ThongTinLabel
             // 
@@ -256,6 +272,7 @@
             this.ThanhPhoNnInput.Name = "ThanhPhoNnInput";
             this.ThanhPhoNnInput.Size = new System.Drawing.Size(221, 22);
             this.ThanhPhoNnInput.TabIndex = 23;
+            this.ThanhPhoNnInput.Leave += new System.EventHandler(this.ThanhPhoNnInput_TextChanged);
             // 
             // label2
             // 
@@ -318,6 +335,7 @@
             // 
             // HinhThucTTInput
             // 
+            this.HinhThucTTInput.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.HinhThucTTInput.FormattingEnabled = true;
             this.HinhThucTTInput.Items.AddRange(new object[] {
             "Tiền mặt",
@@ -363,6 +381,48 @@
             this.TongTienLabel.TabIndex = 38;
             this.TongTienLabel.Text = "Tổng tiền:";
             // 
+            // maSPDataGridViewTextBoxColumn
+            // 
+            this.maSPDataGridViewTextBoxColumn.DataPropertyName = "MaSP";
+            this.maSPDataGridViewTextBoxColumn.HeaderText = "Mã SP";
+            this.maSPDataGridViewTextBoxColumn.Name = "maSPDataGridViewTextBoxColumn";
+            this.maSPDataGridViewTextBoxColumn.ReadOnly = true;
+            this.maSPDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // tenSPDataGridViewTextBoxColumn
+            // 
+            this.tenSPDataGridViewTextBoxColumn.DataPropertyName = "TenSP";
+            this.tenSPDataGridViewTextBoxColumn.HeaderText = "Tên sản phẩm";
+            this.tenSPDataGridViewTextBoxColumn.Name = "tenSPDataGridViewTextBoxColumn";
+            this.tenSPDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tenSPDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // giaBanDataGridViewTextBoxColumn
+            // 
+            this.giaBanDataGridViewTextBoxColumn.DataPropertyName = "GiaBan";
+            this.giaBanDataGridViewTextBoxColumn.HeaderText = "Giá bán";
+            this.giaBanDataGridViewTextBoxColumn.Name = "giaBanDataGridViewTextBoxColumn";
+            this.giaBanDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // SL
+            // 
+            dataGridViewCellStyle1.NullValue = "1";
+            this.SL.DefaultCellStyle = dataGridViewCellStyle1;
+            this.SL.HeaderText = "Số lượng";
+            this.SL.Name = "SL";
+            // 
+            // loaiSPDataGridViewTextBoxColumn
+            // 
+            this.loaiSPDataGridViewTextBoxColumn.DataPropertyName = "LoaiSP";
+            this.loaiSPDataGridViewTextBoxColumn.HeaderText = "Loại SP";
+            this.loaiSPDataGridViewTextBoxColumn.Name = "loaiSPDataGridViewTextBoxColumn";
+            this.loaiSPDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // XoaSP
+            // 
+            this.XoaSP.HeaderText = "Xóa";
+            this.XoaSP.Name = "XoaSP";
+            // 
             // Cart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 15F);
@@ -400,13 +460,14 @@
             this.Controls.Add(this.HoTenNmLabel);
             this.Controls.Add(this.HoTenNmInput);
             this.Controls.Add(this.ThongTinLabel);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.DatHangButton);
             this.Controls.Add(this.GioHangView);
             this.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "Cart";
             this.Text = "Cart";
+            this.Load += new System.EventHandler(this.Cart_Load);
             ((System.ComponentModel.ISupportInitialize)(this.GioHangView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.sanPhamBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -416,7 +477,6 @@
 
         private System.Windows.Forms.DataGridView GioHangView;
         private System.Windows.Forms.Button DatHangButton;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label ThongTinLabel;
         private System.Windows.Forms.TextBox HoTenNmInput;
         private System.Windows.Forms.Label HoTenNmLabel;
@@ -449,5 +509,12 @@
         private System.Windows.Forms.TextBox VoucherInput;
         private System.Windows.Forms.Label PhiVCLabel;
         private System.Windows.Forms.Label TongTienLabel;
+        private System.Windows.Forms.BindingSource sanPhamBindingSource;
+        private System.Windows.Forms.DataGridViewTextBoxColumn maSPDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tenSPDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn giaBanDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SL;
+        private System.Windows.Forms.DataGridViewTextBoxColumn loaiSPDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewButtonColumn XoaSP;
     }
 }

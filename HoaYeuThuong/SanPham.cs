@@ -11,6 +11,7 @@ namespace HoaYeuThuong
         public String MaSP { get; set; }
         public String TenSP { get; set; }
         public String GiaBan { get; set; }
+        public String LoaiSP { get; set; }
 
         public override bool Equals(Object obj)
         {
