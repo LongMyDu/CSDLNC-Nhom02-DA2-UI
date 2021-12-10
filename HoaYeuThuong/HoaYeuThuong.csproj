@@ -52,12 +52,15 @@
     </Compile>
     <Compile Include="SearchSPQT.Designer.cs">
       <DependentUpon>SearchSPQT.cs</DependentUpon>
+<<<<<<< HEAD
     </Compile>
     <Compile Include="LMDForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LMDForm.Designer.cs">
       <DependentUpon>LMDForm.cs</DependentUpon>
+=======
+>>>>>>> 1071d29f04958756123227a943a4633d37b87c3d
     </Compile>
     <Compile Include="MDForm.cs">
       <SubType>Form</SubType>
@@ -70,9 +73,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="SearchSPQT.resx">
       <DependentUpon>SearchSPQT.cs</DependentUpon>
+<<<<<<< HEAD
     </EmbeddedResource>
     <EmbeddedResource Include="LMDForm.resx">
       <DependentUpon>LMDForm.cs</DependentUpon>
+=======
+>>>>>>> 1071d29f04958756123227a943a4633d37b87c3d
     </EmbeddedResource>
     <EmbeddedResource Include="MDForm.resx">
       <DependentUpon>MDForm.cs</DependentUpon>

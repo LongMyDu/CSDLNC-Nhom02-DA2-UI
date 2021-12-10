@@ -14,7 +14,11 @@ namespace HoaYeuThuong
     public partial class SearchSPQT : Form
     {
         // Connection string (@ represents this is a string)
+<<<<<<< HEAD
         string strCon = @"Data Source=DESKTOP-R6PKTGC\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
+=======
+        string strCon = @"Data Source=DESKTOP-MNUAD46\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
+>>>>>>> 1071d29f04958756123227a943a4633d37b87c3d
 
         // Connection object
         SqlConnection sqlCon = null;
