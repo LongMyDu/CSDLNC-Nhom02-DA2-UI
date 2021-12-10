@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grdData = new System.Windows.Forms.DataGridView();
             this.MaSPQT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenSPQT = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -43,14 +44,19 @@
             this.MoneyFrom = new System.Windows.Forms.ComboBox();
             this.MoneyTo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // grdData
             // 
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.grdData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MaSPQT,
@@ -60,12 +66,13 @@
             this.GiaBan,
             this.GiaBanSauGiam,
             this.AddToCartButton});
-            this.grdData.Location = new System.Drawing.Point(20, 100);
+            this.grdData.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.grdData.Location = new System.Drawing.Point(0, 131);
             this.grdData.Margin = new System.Windows.Forms.Padding(2);
             this.grdData.Name = "grdData";
             this.grdData.RowHeadersWidth = 51;
             this.grdData.RowTemplate.Height = 24;
-            this.grdData.Size = new System.Drawing.Size(932, 363);
+            this.grdData.Size = new System.Drawing.Size(963, 363);
             this.grdData.TabIndex = 1;
             this.grdData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdData_CellContentClick);
             // 
@@ -122,19 +129,21 @@
             // 
             // SearchBar
             // 
+            this.SearchBar.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SearchBar.Location = new System.Drawing.Point(20, 24);
             this.SearchBar.Margin = new System.Windows.Forms.Padding(2);
             this.SearchBar.Name = "SearchBar";
-            this.SearchBar.Size = new System.Drawing.Size(854, 20);
+            this.SearchBar.Size = new System.Drawing.Size(854, 22);
             this.SearchBar.TabIndex = 4;
             this.SearchBar.TextChanged += new System.EventHandler(this.SearchBar_TextChanged);
             // 
             // SearchButton
             // 
+            this.SearchButton.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SearchButton.Location = new System.Drawing.Point(878, 24);
             this.SearchButton.Margin = new System.Windows.Forms.Padding(2);
             this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(74, 19);
+            this.SearchButton.Size = new System.Drawing.Size(74, 22);
             this.SearchButton.TabIndex = 5;
             this.SearchButton.Text = "Search";
             this.SearchButton.UseVisualStyleBackColor = true;
@@ -142,78 +151,63 @@
             // 
             // ColorFilter
             // 
+            this.ColorFilter.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ColorFilter.FormattingEnabled = true;
             this.ColorFilter.Location = new System.Drawing.Point(96, 61);
             this.ColorFilter.Margin = new System.Windows.Forms.Padding(2);
             this.ColorFilter.Name = "ColorFilter";
-            this.ColorFilter.Size = new System.Drawing.Size(93, 21);
+            this.ColorFilter.Size = new System.Drawing.Size(93, 23);
             this.ColorFilter.TabIndex = 6;
             this.ColorFilter.SelectedIndexChanged += new System.EventHandler(this.ColorFilter_SelectedIndexChanged);
             // 
             // ThemeFilter
             // 
+            this.ThemeFilter.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ThemeFilter.FormattingEnabled = true;
             this.ThemeFilter.Location = new System.Drawing.Point(205, 61);
             this.ThemeFilter.Margin = new System.Windows.Forms.Padding(2);
             this.ThemeFilter.Name = "ThemeFilter";
-            this.ThemeFilter.Size = new System.Drawing.Size(92, 21);
+            this.ThemeFilter.Size = new System.Drawing.Size(92, 23);
             this.ThemeFilter.TabIndex = 7;
             this.ThemeFilter.SelectedIndexChanged += new System.EventHandler(this.ThemeFilter_SelectedIndexChanged);
             // 
             // MoneyFrom
             // 
+            this.MoneyFrom.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MoneyFrom.FormattingEnabled = true;
             this.MoneyFrom.Location = new System.Drawing.Point(365, 61);
             this.MoneyFrom.Margin = new System.Windows.Forms.Padding(2);
             this.MoneyFrom.Name = "MoneyFrom";
-            this.MoneyFrom.Size = new System.Drawing.Size(122, 21);
+            this.MoneyFrom.Size = new System.Drawing.Size(122, 23);
             this.MoneyFrom.TabIndex = 8;
             this.MoneyFrom.SelectedIndexChanged += new System.EventHandler(this.MoneyFrom_SelectedIndexChanged);
             // 
             // MoneyTo
             // 
+            this.MoneyTo.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MoneyTo.FormattingEnabled = true;
             this.MoneyTo.Location = new System.Drawing.Point(491, 61);
             this.MoneyTo.Margin = new System.Windows.Forms.Padding(2);
             this.MoneyTo.Name = "MoneyTo";
-            this.MoneyTo.Size = new System.Drawing.Size(122, 21);
+            this.MoneyTo.Size = new System.Drawing.Size(122, 23);
             this.MoneyTo.TabIndex = 9;
             this.MoneyTo.SelectedIndexChanged += new System.EventHandler(this.MoneyTo_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(17, 64);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 13);
+            this.label1.Size = new System.Drawing.Size(79, 15);
             this.label1.TabIndex = 10;
             this.label1.Text = "Lọc sản phẩm";
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(20, 560);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(719, 209);
-            this.dataGridView1.TabIndex = 11;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(23, 512);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(149, 33);
-            this.label2.TabIndex = 12;
-            this.label2.Text = "Your Cart";
             // 
             // SearchSPQT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(963, 781);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.dataGridView1);
+            this.ClientSize = new System.Drawing.Size(963, 494);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MoneyTo);
             this.Controls.Add(this.MoneyFrom);
@@ -227,7 +221,6 @@
             this.Text = "SearchSPQT";
             this.Load += new System.EventHandler(this.GQForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -249,7 +242,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn GiaBanSauGiam;
         private System.Windows.Forms.DataGridViewButtonColumn AddToCartButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label label2;
     }
 }

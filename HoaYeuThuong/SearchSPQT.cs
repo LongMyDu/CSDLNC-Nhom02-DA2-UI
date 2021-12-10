@@ -13,12 +13,10 @@ namespace HoaYeuThuong
 {
     public partial class SearchSPQT : Form
     {
+        public HashSet<SanPham> SpDuocThemVaoGio { get; }
+
         // Connection string (@ represents this is a string)
-<<<<<<< HEAD
         string strCon = @"Data Source=DESKTOP-R6PKTGC\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
-=======
-        string strCon = @"Data Source=DESKTOP-MNUAD46\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
->>>>>>> 1071d29f04958756123227a943a4633d37b87c3d
 
         // Connection object
         SqlConnection sqlCon = null;
@@ -28,9 +26,11 @@ namespace HoaYeuThuong
         int moneyFrom = 0;
         int moneyTo = 0;
 
+        
         public SearchSPQT()
         {
             InitializeComponent();
+            SpDuocThemVaoGio = new HashSet<SanPham>();
         }
 
         private void LoadColor()
@@ -283,8 +283,16 @@ namespace HoaYeuThuong
             //when the add to cart button is clicked
             if (grdData.Columns[e.ColumnIndex].Name == "AddToCartButton")
             {
+                String MaSpHienTai = grdData.Rows[e.RowIndex].Cells["MaSPQT"].Value.ToString();
+                String GiaBanSpHienTai = grdData.Rows[e.RowIndex].Cells["GiaBanSauGiam"].Value.ToString();
+                String TenSP = grdData.Rows[e.RowIndex].Cells["TenSPQT"].Value.ToString();
+                SpDuocThemVaoGio.Add(new SanPham() { MaSP = MaSpHienTai, GiaBan = GiaBanSpHienTai, TenSP = TenSP });
 
-            }    
+                //String temp = MaSpHienTai + GiaBanSpHienTai + TenSP + "\n\n";
+                //temp += String.Join(", ", SpDuocThemVaoGio[0].TenSP);
+                MessageBox.Show("Thêm sản phẩm vào giỏ hàng thành công");
+
+            }
         }
     }
 }

@@ -57,11 +57,7 @@ CREATE TABLE NHANVIEN (
   LOAINHANVIENMaLNV  int NULL, 
   PRIMARY KEY (MaNV),
   CHECK (GioiTinhNV IN (N'Nam',N'Nữ')),
-<<<<<<< HEAD
   CHECK (TthdNV IN (N'Đang hoạt động', N'Tạm nghỉ', N'Đã nghỉ')),
-=======
-  CHECK (TthdNV IN (N'Đang làm', N'Tạm nghỉ', N'Đã nghỉ')),
->>>>>>> 1071d29f04958756123227a943a4633d37b87c3d
   CHECK (MucLuongNV > 0),
   CHECK (SoNgayPhepConLaiNV <= 12 AND SoNgayPhepConLaiNV >= 0)
 );
@@ -190,11 +186,7 @@ CREATE TABLE DONDATHANG (
   PRIMARY KEY (MaDDH),
   CHECK (HTThanhToan IN (N'Tiền mặt', N'Thẻ ATM nội địa', N'Thẻ thanh toán quốc tế', N'PayPal', N'Ví điện tử')),
   CHECK (PhiVanChuyen >= 0),
-<<<<<<< HEAD
   CHECK (TinhTrangDH IN (N'Đã tiếp nhận', N'Đang cắm hoa', N'Đã cắm xong', N'Đang giao hàng', N'Giao hàng thành công')),
-=======
-  CHECK (TinhTrangDH IN (N'Đã tiếp nhận', N'Đang xử lý', N'Đang giao hàng', N'Giao hàng thành công')),
->>>>>>> 1071d29f04958756123227a943a4633d37b87c3d
   CHECK (TinhTrangTT IN (N'Đã thanh toán', N'Chưa thanh toán')),
 );
 

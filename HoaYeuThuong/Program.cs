@@ -16,11 +16,7 @@ namespace HoaYeuThuong
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-<<<<<<< HEAD
-
-=======
->>>>>>> 1071d29f04958756123227a943a4633d37b87c3d
-            Application.Run(new SearchSPQT());
+            Application.Run(new MainForm());
         }
     }
 }

@@ -1,13 +1,18 @@
-﻿Select * from chude
-Select * from SANPHAMQUATANG
+﻿Use DB_HOAYEUTHUONG
+
+Select * from chude
+Select count(*) from SANPHAMQUATANG
 select * from VATLIEU
 select * from HOATUOI
 select * from LOAINHANVIEN
-select * from NHANVIEN
+select * from NHANVIEN where LOAINHANVIENMaLNV = 6
 select * from PHIEUXINNHAPHANG
 select * from PHIEUNHANHANG
 select * from Nhan_hoatuoi
+select count(*) from dondathang
+ 
 
+select * from MUA_SPQT
 INSERT INTO PHIEUNHANHANG (NgayNhan)
 VALUES ('10-04-2020')
 
@@ -26,3 +31,5 @@ VALUES
   (1,2,30,100)
 
 
+INSERT INTO MUA_SPQT (DONDATHANGMaDDH, SANPHAMQUATANGMaSPQT)
+Values (2, 2)
