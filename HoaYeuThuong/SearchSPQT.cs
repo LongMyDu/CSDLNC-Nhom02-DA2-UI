@@ -61,7 +61,13 @@ namespace HoaYeuThuong
 
         private void LoadAllSPQT()
         {
-            string query = @"SELECT * FROM SANPHAMQUATANG";
+            string query = @"SELECT SPQT.MaSPQT, SPQT.TenSPQT, SPQT.MieuTaSPQT, SPQT.GiaBan, SPQT.GiaBanSauGiam, CD.TenCD
+            FROM SANPHAMQUATANG SPQT JOIN CHUDE CD ON (SPQT.CHUDEMaCD = CD.MaCD)";
+            LoadSPQT(query);
+        }
+
+        private void LoadSPQT(string query)
+        {
             DataSet ds = RetrieveData(query);
 
             //set DataGridView control to read-only
@@ -72,12 +78,11 @@ namespace HoaYeuThuong
             grdData.DataSource = ds.Tables[0];
             grdData.Columns["MaSPQT"].DataPropertyName = "MaSPQT";
             grdData.Columns["TenSPQT"].DataPropertyName = "TenSPQT";
-            grdData.Columns["ChuDe"].DataPropertyName = "CHUDEMaCD";
+            grdData.Columns["ChuDe"].DataPropertyName = "TenCD";
             grdData.Columns["MieuTaSPQT"].DataPropertyName = "MieuTaSPQT";
             grdData.Columns["GiaBan"].DataPropertyName = "GiaBan";
             grdData.Columns["GiaBanSauGiam"].DataPropertyName = "GiaBanSauGiam";
             grdData.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
-
         }
 
         private void LoadMoney()
@@ -182,6 +187,7 @@ namespace HoaYeuThuong
                 }    
             }
 
+            // if user use theme filter
             if (themeID != 0)
             {
                 string getTheme = "SPQT.CHUDEMaCD = " + themeID.ToString();
@@ -195,6 +201,7 @@ namespace HoaYeuThuong
                 }
             }
 
+            // if user use money filter
             if (moneyFrom != 0)
             {
                 string minMoney = "SPQT.GiaBan >= " + moneyFrom.ToString();
@@ -221,16 +228,17 @@ namespace HoaYeuThuong
                 }
             }
 
+            // if user use color filter, we have to join multiple tables
             if (!isJoin)
             {
-                query = @"SELECT *
-                FROM SANPHAMQUATANG SPQT
+                query = @"SELECT SPQT.MaSPQT, SPQT.TenSPQT, SPQT.MieuTaSPQT, SPQT.GiaBan, SPQT.GiaBanSauGiam, CD.TenCD
+                FROM SANPHAMQUATANG SPQT JOIN CHUDE CD ON (SPQT.CHUDEMaCD = CD.MaCD)
                 ";
             }
             else
             {
-                query = @"SELECT SPQT.MaSPQT, SPQT.TenSPQT, SPQT.MieuTaSPQT, SPQT.GiaBan, SPQT.GiaBanSauGiam, SPQT.CHUDEMaCD
-                FROM SANPHAMQUATANG SPQT JOIN HOATUOI_SPQT HS ON (SPQT.MaSPQT = HS.SANPHAMQUATANGMaSPQT) JOIN HOATUOI HT ON (HS.HOATUOIMaHT = HT.MaHT)
+                query = @"SELECT SPQT.MaSPQT, SPQT.TenSPQT, SPQT.MieuTaSPQT, SPQT.GiaBan, SPQT.GiaBanSauGiam, CD.TenCD
+                FROM SANPHAMQUATANG SPQT JOIN HOATUOI_SPQT HS ON (SPQT.MaSPQT = HS.SANPHAMQUATANGMaSPQT) JOIN HOATUOI HT ON (HS.HOATUOIMaHT = HT.MaHT) JOIN CHUDE CD ON (SPQT.CHUDEMaCD = CD.MaCD)
                 ";
             }
             
@@ -238,22 +246,7 @@ namespace HoaYeuThuong
             {
                 query += condition;
             }
-
-            DataSet ds = RetrieveData(query);
-
-            //set DataGridView control to read-only
-            grdData.ReadOnly = true;
-            grdData.AutoGenerateColumns = false;
-
-            //set the DataGridView control's data source/data table
-            grdData.DataSource = ds.Tables[0];
-            grdData.Columns["MaSPQT"].DataPropertyName = "MaSPQT";
-            grdData.Columns["TenSPQT"].DataPropertyName = "TenSPQT";
-            grdData.Columns["ChuDe"].DataPropertyName = "CHUDEMaCD";
-            grdData.Columns["MieuTaSPQT"].DataPropertyName = "MieuTaSPQT";
-            grdData.Columns["GiaBan"].DataPropertyName = "GiaBan";
-            grdData.Columns["GiaBanSauGiam"].DataPropertyName = "GiaBanSauGiam";
-            grdData.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+            LoadSPQT(query);
         }
 
         private void SearchBar_TextChanged(object sender, EventArgs e)
@@ -283,6 +276,7 @@ namespace HoaYeuThuong
 
         private void grdData_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            //when the add to cart button is clicked
             if (grdData.Columns[e.ColumnIndex].Name == "AddToCartButton")
             {
 

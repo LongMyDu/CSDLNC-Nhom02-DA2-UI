@@ -43,7 +43,10 @@
             this.MoneyFrom = new System.Windows.Forms.ComboBox();
             this.MoneyTo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // grdData
@@ -186,11 +189,31 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Lọc sản phẩm";
             // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(20, 560);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(719, 209);
+            this.dataGridView1.TabIndex = 11;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 21.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(23, 512);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(149, 33);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "Your Cart";
+            // 
             // SearchSPQT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(963, 474);
+            this.ClientSize = new System.Drawing.Size(963, 781);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MoneyTo);
             this.Controls.Add(this.MoneyFrom);
@@ -204,6 +227,7 @@
             this.Text = "SearchSPQT";
             this.Load += new System.EventHandler(this.GQForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,5 +249,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn GiaBanSauGiam;
         private System.Windows.Forms.DataGridViewButtonColumn AddToCartButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Label label2;
     }
 }
