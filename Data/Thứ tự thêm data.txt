@@ -1,0 +1,34 @@
+Smalltables
+hoatuoi
+SPQT
+khachhang
+dondathang
+nhanvien
+voucher
+san pham mua kem
+doitac
+
+mua_hoatuoi
+mua_spmk
+mua_spqt
+
+spqt_hoatuoi
+spqt_vatlieu
+
+phieu phan hoi
+
+phieu dat hang
+dat_vatlieu
+dat_hoatuoi
+
+phieu phan phoi
+phan phoi vat lieu
+phan phoi hoa tuoi
+
+phieu nhan hang
+nhan vat lieu
+nhan hoa tuoi
+
+phieu xin nhap hang
+xin nhap vat lieu
+xin nhap hoa tuoi

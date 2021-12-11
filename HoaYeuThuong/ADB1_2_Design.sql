@@ -77,8 +77,8 @@ CREATE TABLE HOATUOI (
   GiaNhap       bigint NULL, 
   MAUSACMaMau   int NULL, 
   PRIMARY KEY (MaHT),
-  CHECK (GiaBan > GiaBanSauGiam AND GiaBanSauGiam > 0),
-  CHECK (GiaNhap > 0)
+  CHECK (GiaBan >= GiaBanSauGiam AND GiaBanSauGiam >= 0),
+  CHECK (GiaNhap >= 0)
 );
 
 CREATE TABLE MAUSAC (
@@ -95,7 +95,7 @@ CREATE TABLE SANPHAMQUATANG (
   GiaBanSauGiam bigint NULL, 
   CHUDEMaCD     int NULL, 
   PRIMARY KEY (MaSPQT),
-  CHECK (GiaBan > GiaBanSauGiam AND GiaBanSauGiam > 0)
+  CHECK (GiaBan >= GiaBanSauGiam AND GiaBanSauGiam >= 0)
 );
 
 CREATE TABLE CHUDE (
