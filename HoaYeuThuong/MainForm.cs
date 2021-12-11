@@ -131,7 +131,7 @@ namespace HoaYeuThuong
     {
         public static string getconnect()
         {
-            return @"Data Source=LEOSMAC25A1\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
+            return @"Data Source=TRIEUDUNGFC9F\SQLEXPRESS;Initial Catalog=DB_HOAYEUTHUONG;Integrated Security=True";
         }
     }
 }

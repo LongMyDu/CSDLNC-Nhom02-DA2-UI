@@ -53,11 +53,23 @@
     <Compile Include="Cart.Designer.cs">
       <DependentUpon>Cart.cs</DependentUpon>
     </Compile>
+    <Compile Include="NVGiaoHangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NVGiaoHangForm.Designer.cs">
+      <DependentUpon>NVGiaoHangForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NVCamHoaForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NVCamHoaForm.Designer.cs">
+      <DependentUpon>NVCamHoaForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SanPham.cs" />
     <Compile Include="SearchSPMK.cs">
@@ -78,12 +90,6 @@
     <Compile Include="SearchSPQT.Designer.cs">
       <DependentUpon>SearchSPQT.cs</DependentUpon>
     </Compile>
-    <Compile Include="LMDForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="LMDForm.Designer.cs">
-      <DependentUpon>LMDForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="MDForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +105,12 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="NVCamHoaForm.resx">
+      <DependentUpon>NVCamHoaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NVGiaoHangForm.resx">
+      <DependentUpon>NVGiaoHangForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SearchSPMK.resx">
       <DependentUpon>SearchSPMK.cs</DependentUpon>
     </EmbeddedResource>
@@ -107,9 +119,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SearchSPQT.resx">
       <DependentUpon>SearchSPQT.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="LMDForm.resx">
-      <DependentUpon>LMDForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MDForm.resx">
       <DependentUpon>MDForm.cs</DependentUpon>
