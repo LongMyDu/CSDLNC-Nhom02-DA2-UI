@@ -13,11 +13,6 @@ using System.Data.SqlClient;
 
 namespace HoaYeuThuong
 {
-    public static class theconnection {
-       public static string getconnect() {
-       return @"Data Source=LEOSMAC25A1\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";}
-}
-
     public partial class MainForm : Form
     {
         HashSet<SanPham> GioHang = new HashSet<SanPham>();
@@ -129,6 +124,14 @@ namespace HoaYeuThuong
                 HT_Form = new SearchHT();
             }
             HT_Form.Show();
+        }
+    }
+
+    public static class theconnection
+    {
+        public static string getconnect()
+        {
+            return @"Data Source=LEOSMAC25A1\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
         }
     }
 }

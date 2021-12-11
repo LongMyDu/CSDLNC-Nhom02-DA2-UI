@@ -1,6 +1,6 @@
 ﻿namespace HoaYeuThuong
 {
-    partial class LMDForm
+    partial class NVCamHoa
     {
         /// <summary>
         /// Required designer variable.

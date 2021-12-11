@@ -11,12 +11,12 @@ using System.Data.SqlClient;
 
 namespace HoaYeuThuong
 {
-    public partial class LMDForm : Form
+    public partial class NVCamHoa : Form
     {
         string strCon = theconnection.getconnect() ;
         SqlConnection sqlCon = null;
         string MaDdhHienTai;
-        public LMDForm()
+        public NVCamHoa()
         {
             InitializeComponent();
             ConnectToDB();

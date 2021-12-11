@@ -16,7 +16,7 @@ namespace HoaYeuThuong
         public HashSet<SanPham> SpDuocThemVaoGio { get; }
 
         // Connection string (@ represents this is a string)
-        string strCon = theconnection.getconnect() ;
+        string strCon = theconnection.getconnect();
 
         // Connection object
         SqlConnection sqlCon = null;
