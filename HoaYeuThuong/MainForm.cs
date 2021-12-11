@@ -20,6 +20,9 @@ namespace HoaYeuThuong
         SearchSPMK SPMK_Form = null;
         SearchHT HT_Form = null;
         Cart GioHang_Form = null;
+        NVCamHoaForm NvCamHoa_Form = null;
+        NVGiaoHangForm NvGiaoHang_Form = null;
+
         string strCon = theconnection.getconnect() ;
         SqlConnection sqlCon = null;
 
@@ -125,13 +128,33 @@ namespace HoaYeuThuong
             }
             HT_Form.Show();
         }
+
+        private void GoToNVCamHoa_Click(object sender, EventArgs e)
+        {
+            // Mở form NvCamHoa_Form, nếu chưa tồn tại hoặc đã bị tắt thì tạo form mới
+            if (NvCamHoa_Form == null || NvCamHoa_Form.IsDisposed == true)
+            {
+                NvCamHoa_Form = new NVCamHoaForm();
+            }
+            NvCamHoa_Form.Show();
+        }
+
+        private void GoToNVGiaoHang_Click(object sender, EventArgs e)
+        {
+            // Mở form NvGiaoHang_Form, nếu chưa tồn tại hoặc đã bị tắt thì tạo form mới
+            if (NvGiaoHang_Form == null || NvGiaoHang_Form.IsDisposed == true)
+            {
+                NvGiaoHang_Form = new NVGiaoHangForm();
+            }
+            NvGiaoHang_Form.Show();
+        }
     }
 
     public static class theconnection
     {
         public static string getconnect()
         {
-            return @"Data Source=DESKTOP-R6PKTGC\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
+            return @"Data Source=TRIEUDUNGFC9F\SQLEXPRESS;Initial Catalog=DB_HOAYEUTHUONG;Integrated Security=True";
         }
     }
 }

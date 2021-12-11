@@ -59,11 +59,11 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NVCamHoaForm.cs">
+    <Compile Include="NhanVienCamHoa.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NVCamHoaForm.Designer.cs">
-      <DependentUpon>NVCamHoaForm.cs</DependentUpon>
+    <Compile Include="NhanVienCamHoa.Designer.cs">
+      <DependentUpon>NhanVienCamHoa.cs</DependentUpon>
     </Compile>
     <Compile Include="SanPham.cs" />
     <Compile Include="SearchSPMK.cs">
@@ -90,6 +90,7 @@
     <Compile Include="MDForm.Designer.cs">
       <DependentUpon>MDForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="NVCamHoaView-DonDatHang.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Cart.resx">
@@ -98,8 +99,8 @@
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NVCamHoaForm.resx">
-      <DependentUpon>NVCamHoaForm.cs</DependentUpon>
+    <EmbeddedResource Include="NhanVienCamHoa.resx">
+      <DependentUpon>NhanVienCamHoa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchSPMK.resx">
       <DependentUpon>SearchSPMK.cs</DependentUpon>

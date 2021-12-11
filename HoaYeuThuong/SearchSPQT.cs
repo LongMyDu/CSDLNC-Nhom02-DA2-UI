@@ -18,6 +18,12 @@ namespace HoaYeuThuong
         // Connection string (@ represents this is a string)
         string strCon = theconnection.getconnect();
 
+        //Set the SqlDataAdapter object
+        SqlDataAdapter dAdapterMain = new SqlDataAdapter();
+
+        //define dataset
+        DataTable dt = new DataTable();
+
         // Connection object
         SqlConnection sqlCon = null;
         string searchText = "";
@@ -25,18 +31,34 @@ namespace HoaYeuThuong
         int colorID = 0;
         int moneyFrom = 0;
         int moneyTo = 0;
+        int index = 1;
+        int size = 50;
 
-        
         public SearchSPQT()
         {
             InitializeComponent();
             SpDuocThemVaoGio = new HashSet<SanPham>();
         }
 
+        private void RetrieveData(string query)
+        {
+            ConnectDB();
+            //define the SqlCommand object
+            SqlCommand cmd = new SqlCommand(query, sqlCon);
+
+            //Set the SqlDataAdapter object
+            dAdapterMain.SelectCommand = cmd;
+
+            //fill dataset with query results
+            dt.Clear();
+            dAdapterMain.Fill((index - 1) * size, size, dt);
+            DisconnectDB();
+        }
+
         private void LoadColor()
         {
             string query = @"SELECT * FROM MAUSAC";
-            DataSet ds = RetrieveData(query);
+            DataSet ds = LoadData(query);
             DataRow row = ds.Tables[0].NewRow();
             row["MaMau"] = 0;
             row["TenMau"] = "--Màu sắc--";
@@ -51,7 +73,7 @@ namespace HoaYeuThuong
         private void LoadTheme()
         {
             string query = @"SELECT * FROM CHUDE";
-            DataSet ds = RetrieveData(query);
+            DataSet ds = LoadData(query);
             DataRow row = ds.Tables[0].NewRow();
             row["MaCD"] = 0;
             row["TenCD"] = "--Chủ đề--";
@@ -65,21 +87,21 @@ namespace HoaYeuThuong
 
         private void LoadAllSPQT()
         {
-            string query = @"SELECT SPQT.MaSPQT, SPQT.TenSPQT, SPQT.MieuTaSPQT, SPQT.GiaBan, SPQT.GiaBanSauGiam, CD.TenCD
+            string query = @"SELECT TOP 5000 SPQT.MaSPQT, SPQT.TenSPQT, SPQT.MieuTaSPQT, SPQT.GiaBan, SPQT.GiaBanSauGiam, CD.TenCD
             FROM SANPHAMQUATANG SPQT JOIN CHUDE CD ON (SPQT.CHUDEMaCD = CD.MaCD)";
             LoadSPQT(query);
         }
 
         private void LoadSPQT(string query)
         {
-            DataSet ds = RetrieveData(query);
+            RetrieveData(query);
 
             //set DataGridView control to read-only
             grdData.ReadOnly = true;
             grdData.AutoGenerateColumns = false;
 
             //set the DataGridView control's data source/data table
-            grdData.DataSource = ds.Tables[0];
+            grdData.DataSource = dt;
             grdData.Columns["MaSPQT"].DataPropertyName = "MaSPQT";
             grdData.Columns["TenSPQT"].DataPropertyName = "TenSPQT";
             grdData.Columns["ChuDe"].DataPropertyName = "TenCD";
@@ -139,7 +161,7 @@ namespace HoaYeuThuong
             }
         }
 
-        private DataSet RetrieveData(string query)
+        private DataSet LoadData(string query)
         {
             ConnectDB();
             //define the SqlCommand object
@@ -163,6 +185,7 @@ namespace HoaYeuThuong
             LoadTheme();
             LoadAllSPQT();
             LoadMoney();
+            PreviousButton.Enabled = false;
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
@@ -235,13 +258,13 @@ namespace HoaYeuThuong
             // if user use color filter, we have to join multiple tables
             if (!isJoin)
             {
-                query = @"SELECT SPQT.MaSPQT, SPQT.TenSPQT, SPQT.MieuTaSPQT, SPQT.GiaBan, SPQT.GiaBanSauGiam, CD.TenCD
+                query = @"SELECT TOP 5000 SPQT.MaSPQT, SPQT.TenSPQT, SPQT.MieuTaSPQT, SPQT.GiaBan, SPQT.GiaBanSauGiam, CD.TenCD
                 FROM SANPHAMQUATANG SPQT JOIN CHUDE CD ON (SPQT.CHUDEMaCD = CD.MaCD)
                 ";
             }
             else
             {
-                query = @"SELECT SPQT.MaSPQT, SPQT.TenSPQT, SPQT.MieuTaSPQT, SPQT.GiaBan, SPQT.GiaBanSauGiam, CD.TenCD
+                query = @"SELECT TOP 5000 SPQT.MaSPQT, SPQT.TenSPQT, SPQT.MieuTaSPQT, SPQT.GiaBan, SPQT.GiaBanSauGiam, CD.TenCD
                 FROM SANPHAMQUATANG SPQT JOIN HOATUOI_SPQT HS ON (SPQT.MaSPQT = HS.SANPHAMQUATANGMaSPQT) JOIN HOATUOI HT ON (HS.HOATUOIMaHT = HT.MaHT) JOIN CHUDE CD ON (SPQT.CHUDEMaCD = CD.MaCD)
                 ";
             }
@@ -249,6 +272,12 @@ namespace HoaYeuThuong
             if (!String.Equals(condition, "WHERE"))
             {
                 query += condition;
+            }
+            index = 1;
+            PageNum.Text = index.ToString();
+            if (index == 1)
+            {
+                PreviousButton.Enabled = false;
             }
             LoadSPQT(query);
         }
@@ -292,6 +321,27 @@ namespace HoaYeuThuong
                 //temp += String.Join(", ", SpDuocThemVaoGio[0].TenSP);
                 MessageBox.Show("Thêm sản phẩm vào giỏ hàng thành công");
 
+            }
+        }
+
+        private void NextButton_Click(object sender, EventArgs e)
+        {
+            PreviousButton.Enabled = true;
+            index++;
+            PageNum.Text = index.ToString();
+            dt.Clear();
+            dAdapterMain.Fill((index - 1) * size, size, dt);
+        }
+
+        private void PreviousButton_Click(object sender, EventArgs e)
+        {
+            index--;
+            PageNum.Text = index.ToString();
+            dt.Clear();
+            dAdapterMain.Fill((index - 1) * size, size, dt);
+            if (index == 1)
+            {
+                PreviousButton.Enabled = false;
             }
         }
     }
