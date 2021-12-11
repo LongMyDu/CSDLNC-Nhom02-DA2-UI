@@ -59,11 +59,15 @@
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NhanVienCamHoa.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="NhanVienCamHoa.cs" />
     <Compile Include="NhanVienCamHoa.Designer.cs">
       <DependentUpon>NhanVienCamHoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NVGiaoHangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NVGiaoHangForm.Designer.cs">
+      <DependentUpon>NVGiaoHangForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SanPham.cs" />
     <Compile Include="SearchSPMK.cs">
@@ -101,6 +105,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="NhanVienCamHoa.resx">
       <DependentUpon>NhanVienCamHoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NVGiaoHangForm.resx">
+      <DependentUpon>NVGiaoHangForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchSPMK.resx">
       <DependentUpon>SearchSPMK.cs</DependentUpon>
