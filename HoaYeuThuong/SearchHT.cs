@@ -24,6 +24,14 @@ namespace HoaYeuThuong
         int colorID = 0;
         int moneyFrom = 0;
         int moneyTo = 0;
+        int index = 1;
+        int size = 50;
+
+        //Set the SqlDataAdapter object
+        SqlDataAdapter dAdapterMain = new SqlDataAdapter();
+
+        //define dataset
+        DataTable dt = new DataTable();
 
         public SearchHT()
         {
@@ -31,10 +39,28 @@ namespace HoaYeuThuong
             SpDuocThemVaoGio = new HashSet<SanPham>();
         }
 
+        private DataSet LoadData(string query)
+        {
+            ConnectDB();
+            //define the SqlCommand object
+            SqlCommand cmd = new SqlCommand(query, sqlCon);
+
+            //Set the SqlDataAdapter object
+            SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
+
+            //define dataset
+            DataSet ds = new DataSet();
+
+            //fill dataset with query results
+            dAdapter.Fill(ds);
+            DisconnectDB();
+            return ds;
+        }
+
         private void LoadColor()
         {
             string query = @"SELECT * FROM MAUSAC";
-            DataSet ds = RetrieveData(query);
+            DataSet ds = LoadData(query);
             DataRow row = ds.Tables[0].NewRow();
             row["MaMau"] = 0;
             row["TenMau"] = "--Màu sắc--";
@@ -48,21 +74,21 @@ namespace HoaYeuThuong
 
         private void LoadAllHT()
         {
-            string query = @"SELECT HT.MaHT, HT.TenHT, HT.YNghiaHT, HT.GiaBan, HT.GiaBanSauGiam, MS.TenMau
+            string query = @"SELECT TOP 5000 HT.MaHT, HT.TenHT, HT.YNghiaHT, HT.GiaBan, HT.GiaBanSauGiam, MS.TenMau
             FROM HOATUOI HT JOIN MAUSAC MS ON (HT.MAUSACMaMau = MS.MaMau)";
             LoadHT(query);
         }
 
         private void LoadHT(string query)
         {
-            DataSet ds = RetrieveData(query);
+            RetrieveData(query);
 
             //set DataGridView control to read-only
             grdData.ReadOnly = true;
             grdData.AutoGenerateColumns = false;
 
             //set the DataGridView control's data source/data table
-            grdData.DataSource = ds.Tables[0];
+            grdData.DataSource = dt;
             grdData.Columns["MaHT"].DataPropertyName = "MaHT";
             grdData.Columns["TenHT"].DataPropertyName = "TenHT";
             grdData.Columns["YNghiaHT"].DataPropertyName = "YNghiaHT";
@@ -78,7 +104,7 @@ namespace HoaYeuThuong
             moneyList.Add("--Giá tiền thấp nhất--");
             for (int i = 1; i <= 20; i++)
             {
-                moneyList.Add((i * 100000).ToString());
+                moneyList.Add((i * 10000).ToString());
             }    
             MoneyFrom.DataSource = moneyList;
 
@@ -86,7 +112,7 @@ namespace HoaYeuThuong
             moneyList2.Add("--Giá tiền cao nhất--");
             for (int i = 1; i <= 20; i++)
             {
-                moneyList2.Add((i * 100000).ToString());
+                moneyList2.Add((i * 10000).ToString());
             }
             MoneyTo.DataSource = moneyList2;
         }
@@ -122,22 +148,19 @@ namespace HoaYeuThuong
             }
         }
 
-        private DataSet RetrieveData(string query)
+        private void RetrieveData(string query)
         {
             ConnectDB();
             //define the SqlCommand object
             SqlCommand cmd = new SqlCommand(query, sqlCon);
 
             //Set the SqlDataAdapter object
-            SqlDataAdapter dAdapter = new SqlDataAdapter(cmd);
-
-            //define dataset
-            DataSet ds = new DataSet();
+            dAdapterMain.SelectCommand = cmd;
 
             //fill dataset with query results
-            dAdapter.Fill(ds);
+            dt.Clear();
+            dAdapterMain.Fill((index-1)*size, size, dt);
             DisconnectDB();
-            return ds;
         }
 
         private void GQForm_Load(object sender, EventArgs e)
@@ -145,12 +168,13 @@ namespace HoaYeuThuong
             LoadColor();
             LoadAllHT();
             LoadMoney();
+            PreviousButton.Enabled = false;
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
             string condition = "WHERE";
-            string query = @"SELECT HT.MaHT, HT.TenHT, HT.YNghiaHT, HT.GiaBan, HT.GiaBanSauGiam, MS.TenMau
+            string query = @"SELECT TOP 5000 HT.MaHT, HT.TenHT, HT.YNghiaHT, HT.GiaBan, HT.GiaBanSauGiam, MS.TenMau
             FROM HOATUOI HT JOIN MAUSAC MS ON (HT.MAUSACMaMau = MS.MaMau)
             ";
 
@@ -205,6 +229,12 @@ namespace HoaYeuThuong
             {
                 query += condition;
             }
+            index = 1;
+            PageNum.Text = index.ToString();
+            if (index == 1)
+            {
+                PreviousButton.Enabled = false;
+            }
             LoadHT(query);
         }
 
@@ -220,12 +250,12 @@ namespace HoaYeuThuong
 
         private void MoneyFrom_SelectedIndexChanged(object sender, EventArgs e)
         {
-            moneyFrom = MoneyFrom.SelectedIndex*100000;
+            moneyFrom = MoneyFrom.SelectedIndex*10000;
         }
 
         private void MoneyTo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            moneyTo = MoneyTo.SelectedIndex*100000;
+            moneyTo = MoneyTo.SelectedIndex*10000;
         }
 
         private void grdData_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -243,6 +273,27 @@ namespace HoaYeuThuong
                 MessageBox.Show("Thêm sản phẩm vào giỏ hàng thành công");
 
             }
+        }
+
+        private void NextButton_Click(object sender, EventArgs e)
+        {
+            PreviousButton.Enabled = true;
+            index++;
+            PageNum.Text = index.ToString();
+            dt.Clear();
+            dAdapterMain.Fill((index - 1) * size, size, dt);
+        }
+
+        private void PreviousButton_Click(object sender, EventArgs e)
+        {
+            index--;
+            PageNum.Text = index.ToString();
+            dt.Clear();
+            dAdapterMain.Fill((index - 1) * size, size, dt);
+            if (index == 1)
+            {
+                PreviousButton.Enabled = false;
+            }   
         }
     }
 }

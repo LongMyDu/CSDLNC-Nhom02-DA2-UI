@@ -35,6 +35,9 @@
             this.MoneyFrom = new System.Windows.Forms.ComboBox();
             this.MoneyTo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.PageNum = new System.Windows.Forms.Label();
+            this.PreviousButton = new System.Windows.Forms.Button();
+            this.NextButton = new System.Windows.Forms.Button();
             this.MaSPMK = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenSPMK = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MieuTaSPMK = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -62,13 +65,12 @@
             this.GiaBan,
             this.DoiTac,
             this.AddToCartButton});
-            this.grdData.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.grdData.Location = new System.Drawing.Point(0, 161);
             this.grdData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grdData.Name = "grdData";
             this.grdData.RowHeadersWidth = 51;
             this.grdData.RowTemplate.Height = 24;
-            this.grdData.Size = new System.Drawing.Size(1284, 447);
+            this.grdData.Size = new System.Drawing.Size(1284, 408);
             this.grdData.TabIndex = 1;
             this.grdData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdData_CellContentClick);
             // 
@@ -127,6 +129,35 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Lọc sản phẩm";
             // 
+            // PageNum
+            // 
+            this.PageNum.AutoSize = true;
+            this.PageNum.Location = new System.Drawing.Point(624, 577);
+            this.PageNum.Name = "PageNum";
+            this.PageNum.Size = new System.Drawing.Size(14, 16);
+            this.PageNum.TabIndex = 16;
+            this.PageNum.Text = "1";
+            // 
+            // PreviousButton
+            // 
+            this.PreviousButton.Location = new System.Drawing.Point(430, 574);
+            this.PreviousButton.Name = "PreviousButton";
+            this.PreviousButton.Size = new System.Drawing.Size(75, 23);
+            this.PreviousButton.TabIndex = 15;
+            this.PreviousButton.Text = "Previous";
+            this.PreviousButton.UseVisualStyleBackColor = true;
+            this.PreviousButton.Click += new System.EventHandler(this.PreviousButton_Click);
+            // 
+            // NextButton
+            // 
+            this.NextButton.Location = new System.Drawing.Point(762, 574);
+            this.NextButton.Name = "NextButton";
+            this.NextButton.Size = new System.Drawing.Size(75, 23);
+            this.NextButton.TabIndex = 14;
+            this.NextButton.Text = "Next";
+            this.NextButton.UseVisualStyleBackColor = true;
+            this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
+            // 
             // MaSPMK
             // 
             this.MaSPMK.HeaderText = "Mã SPMK";
@@ -176,6 +207,9 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 608);
+            this.Controls.Add(this.PageNum);
+            this.Controls.Add(this.PreviousButton);
+            this.Controls.Add(this.NextButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MoneyTo);
             this.Controls.Add(this.MoneyFrom);
@@ -199,6 +233,9 @@
         private System.Windows.Forms.ComboBox MoneyFrom;
         private System.Windows.Forms.ComboBox MoneyTo;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label PageNum;
+        private System.Windows.Forms.Button PreviousButton;
+        private System.Windows.Forms.Button NextButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaSPMK;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenSPMK;
         private System.Windows.Forms.DataGridViewTextBoxColumn MieuTaSPMK;

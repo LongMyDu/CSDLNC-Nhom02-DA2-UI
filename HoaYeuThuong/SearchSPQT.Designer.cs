@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.grdData = new System.Windows.Forms.DataGridView();
             this.MaSPQT = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenSPQT = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,19 +44,22 @@
             this.MoneyFrom = new System.Windows.Forms.ComboBox();
             this.MoneyTo = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.PageNum = new System.Windows.Forms.Label();
+            this.PreviousButton = new System.Windows.Forms.Button();
+            this.NextButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grdData)).BeginInit();
             this.SuspendLayout();
             // 
             // grdData
             // 
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.grdData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle4.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.grdData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle4;
             this.grdData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.grdData.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.MaSPQT,
@@ -66,13 +69,12 @@
             this.GiaBan,
             this.GiaBanSauGiam,
             this.AddToCartButton});
-            this.grdData.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.grdData.Location = new System.Drawing.Point(0, 131);
-            this.grdData.Margin = new System.Windows.Forms.Padding(2);
+            this.grdData.Location = new System.Drawing.Point(0, 161);
+            this.grdData.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.grdData.Name = "grdData";
             this.grdData.RowHeadersWidth = 51;
             this.grdData.RowTemplate.Height = 24;
-            this.grdData.Size = new System.Drawing.Size(963, 363);
+            this.grdData.Size = new System.Drawing.Size(1284, 406);
             this.grdData.TabIndex = 1;
             this.grdData.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grdData_CellContentClick);
             // 
@@ -129,21 +131,21 @@
             // 
             // SearchBar
             // 
-            this.SearchBar.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SearchBar.Location = new System.Drawing.Point(20, 24);
-            this.SearchBar.Margin = new System.Windows.Forms.Padding(2);
+            this.SearchBar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SearchBar.Location = new System.Drawing.Point(27, 30);
+            this.SearchBar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SearchBar.Name = "SearchBar";
-            this.SearchBar.Size = new System.Drawing.Size(854, 22);
+            this.SearchBar.Size = new System.Drawing.Size(1137, 23);
             this.SearchBar.TabIndex = 4;
             this.SearchBar.TextChanged += new System.EventHandler(this.SearchBar_TextChanged);
             // 
             // SearchButton
             // 
-            this.SearchButton.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SearchButton.Location = new System.Drawing.Point(878, 24);
-            this.SearchButton.Margin = new System.Windows.Forms.Padding(2);
+            this.SearchButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SearchButton.Location = new System.Drawing.Point(1171, 30);
+            this.SearchButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.SearchButton.Name = "SearchButton";
-            this.SearchButton.Size = new System.Drawing.Size(74, 22);
+            this.SearchButton.Size = new System.Drawing.Size(99, 27);
             this.SearchButton.TabIndex = 5;
             this.SearchButton.Text = "Search";
             this.SearchButton.UseVisualStyleBackColor = true;
@@ -151,63 +153,96 @@
             // 
             // ColorFilter
             // 
-            this.ColorFilter.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ColorFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ColorFilter.FormattingEnabled = true;
-            this.ColorFilter.Location = new System.Drawing.Point(96, 61);
-            this.ColorFilter.Margin = new System.Windows.Forms.Padding(2);
+            this.ColorFilter.Location = new System.Drawing.Point(128, 75);
+            this.ColorFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ColorFilter.Name = "ColorFilter";
-            this.ColorFilter.Size = new System.Drawing.Size(93, 23);
+            this.ColorFilter.Size = new System.Drawing.Size(123, 25);
             this.ColorFilter.TabIndex = 6;
             this.ColorFilter.SelectedIndexChanged += new System.EventHandler(this.ColorFilter_SelectedIndexChanged);
             // 
             // ThemeFilter
             // 
-            this.ThemeFilter.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ThemeFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ThemeFilter.FormattingEnabled = true;
-            this.ThemeFilter.Location = new System.Drawing.Point(205, 61);
-            this.ThemeFilter.Margin = new System.Windows.Forms.Padding(2);
+            this.ThemeFilter.Location = new System.Drawing.Point(273, 75);
+            this.ThemeFilter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ThemeFilter.Name = "ThemeFilter";
-            this.ThemeFilter.Size = new System.Drawing.Size(92, 23);
+            this.ThemeFilter.Size = new System.Drawing.Size(121, 25);
             this.ThemeFilter.TabIndex = 7;
             this.ThemeFilter.SelectedIndexChanged += new System.EventHandler(this.ThemeFilter_SelectedIndexChanged);
             // 
             // MoneyFrom
             // 
-            this.MoneyFrom.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MoneyFrom.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MoneyFrom.FormattingEnabled = true;
-            this.MoneyFrom.Location = new System.Drawing.Point(365, 61);
-            this.MoneyFrom.Margin = new System.Windows.Forms.Padding(2);
+            this.MoneyFrom.Location = new System.Drawing.Point(487, 75);
+            this.MoneyFrom.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MoneyFrom.Name = "MoneyFrom";
-            this.MoneyFrom.Size = new System.Drawing.Size(122, 23);
+            this.MoneyFrom.Size = new System.Drawing.Size(161, 25);
             this.MoneyFrom.TabIndex = 8;
             this.MoneyFrom.SelectedIndexChanged += new System.EventHandler(this.MoneyFrom_SelectedIndexChanged);
             // 
             // MoneyTo
             // 
-            this.MoneyTo.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.MoneyTo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MoneyTo.FormattingEnabled = true;
-            this.MoneyTo.Location = new System.Drawing.Point(491, 61);
-            this.MoneyTo.Margin = new System.Windows.Forms.Padding(2);
+            this.MoneyTo.Location = new System.Drawing.Point(655, 75);
+            this.MoneyTo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MoneyTo.Name = "MoneyTo";
-            this.MoneyTo.Size = new System.Drawing.Size(122, 23);
+            this.MoneyTo.Size = new System.Drawing.Size(161, 25);
             this.MoneyTo.TabIndex = 9;
             this.MoneyTo.SelectedIndexChanged += new System.EventHandler(this.MoneyTo_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Open Sans", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(17, 64);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(23, 79);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(79, 15);
+            this.label1.Size = new System.Drawing.Size(97, 17);
             this.label1.TabIndex = 10;
             this.label1.Text = "Lọc sản phẩm";
             // 
+            // PageNum
+            // 
+            this.PageNum.AutoSize = true;
+            this.PageNum.Location = new System.Drawing.Point(626, 576);
+            this.PageNum.Name = "PageNum";
+            this.PageNum.Size = new System.Drawing.Size(14, 16);
+            this.PageNum.TabIndex = 16;
+            this.PageNum.Text = "1";
+            // 
+            // PreviousButton
+            // 
+            this.PreviousButton.Location = new System.Drawing.Point(432, 573);
+            this.PreviousButton.Name = "PreviousButton";
+            this.PreviousButton.Size = new System.Drawing.Size(75, 23);
+            this.PreviousButton.TabIndex = 15;
+            this.PreviousButton.Text = "Previous";
+            this.PreviousButton.UseVisualStyleBackColor = true;
+            this.PreviousButton.Click += new System.EventHandler(this.PreviousButton_Click);
+            // 
+            // NextButton
+            // 
+            this.NextButton.Location = new System.Drawing.Point(764, 573);
+            this.NextButton.Name = "NextButton";
+            this.NextButton.Size = new System.Drawing.Size(75, 23);
+            this.NextButton.TabIndex = 14;
+            this.NextButton.Text = "Next";
+            this.NextButton.UseVisualStyleBackColor = true;
+            this.NextButton.Click += new System.EventHandler(this.NextButton_Click);
+            // 
             // SearchSPQT
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(963, 494);
+            this.ClientSize = new System.Drawing.Size(1284, 608);
+            this.Controls.Add(this.PageNum);
+            this.Controls.Add(this.PreviousButton);
+            this.Controls.Add(this.NextButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.MoneyTo);
             this.Controls.Add(this.MoneyFrom);
@@ -216,7 +251,7 @@
             this.Controls.Add(this.SearchButton);
             this.Controls.Add(this.SearchBar);
             this.Controls.Add(this.grdData);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "SearchSPQT";
             this.Text = "SearchSPQT";
             this.Load += new System.EventHandler(this.GQForm_Load);
@@ -242,5 +277,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn GiaBanSauGiam;
         private System.Windows.Forms.DataGridViewButtonColumn AddToCartButton;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label PageNum;
+        private System.Windows.Forms.Button PreviousButton;
+        private System.Windows.Forms.Button NextButton;
     }
 }
