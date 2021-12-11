@@ -10,9 +10,12 @@ select * from PHIEUXINNHAPHANG
 select * from PHIEUNHANHANG
 select * from Nhan_hoatuoi
 select count(*) from dondathang
- 
+select * from PHIEUPHANPHOI
 select * from SANPHAMQUATANG
 select * from MUA_SPQT
+
+select * from HOATUOI_SPQT
+select * from VATLIEU_SPQT
 INSERT INTO PHIEUNHANHANG (NgayNhan)
 VALUES ('10-04-2020')
 
@@ -33,3 +36,7 @@ VALUES
 
 INSERT INTO MUA_SPQT (DONDATHANGMaDDH, SANPHAMQUATANGMaSPQT)
 Values (2, 2)
+
+INSERT INTO [NHAN_HOATUOI] (PHIEUNHANHANGMaPNH,HOATUOIMaHT,DonGia,SoLuong)
+VALUES
+  (367,2,2,7)

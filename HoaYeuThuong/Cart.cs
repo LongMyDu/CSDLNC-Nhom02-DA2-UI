@@ -19,30 +19,15 @@ namespace HoaYeuThuong
         public Cart(String sqlConnString, HashSet<SanPham> GioHang)
         {
             InitializeComponent();
-
-            foreach (var SP in GioHang.ToList())
+            List<SanPham> ListTrongGioHang = GioHang.ToList();
+            for (var i = 0; i < ListTrongGioHang.Count; i++)
             {
-                sanPhamBindingSource.Add(SP);
+                sanPhamBindingSource.Add(ListTrongGioHang[i]);
             }
-
-            //sanPhamBindingSource.DataSource = SpTrongGio;
-            //GioHangView.DataSource = sanPhamBindingSource;
-
-            //Thêm 1 cột là số lượng
-            //GioHangView.Columns.Add("SL", "Số lượng");
-            //GioHangView.Columns["SL"].DefaultCellStyle.NullValue = "1";
-
-            //Thêm 1 cột là nút xóa
-            //DataGridViewButtonColumn col = new DataGridViewButtonColumn();
-            //col.UseColumnTextForButtonValue = true;
-            //col.Text = "Xóa sản phẩm";
-            //col.Name = "XoaSP";
-            //GioHangView.Columns.Add(col);
-
-            //GioHangView.Columns["MaSP"].Visible = false;
 
             this.sqlConnString = sqlConnString;
 
+            // Cho hình thức thanh toán mặc định là Tiền mặt
             HinhThucTTInput.SelectedIndex = 0;
         }
 
@@ -67,28 +52,33 @@ namespace HoaYeuThuong
         private void Them_CTDDH(SqlConnection connection, SqlTransaction transaction, int MaDDH)
         {
 
-            SqlCommand command = connection.CreateCommand();
-            command.Connection = connection;
-            command.Transaction = transaction;
-
             for(var i = 0; i < sanPhamBindingSource.List.Count; i++)
             {
+                SqlCommand command = connection.CreateCommand();
+                command.Connection = connection;
+                command.Transaction = transaction;
+
                 SanPham SP = (SanPham)sanPhamBindingSource.List[i];
                 String SoLuong = GioHangView.Rows[i].Cells["SL"].Value.ToString();
                
-                if (SP.LoaiSP == "Hoa tươi")
+                if (SP.LoaiSP == "HT")
                 {
                     command.CommandText =
-                    @"INSERT INTO Mua_HOATUOI(DONDATHANGMaDDH, HOATUOIMaHT)
-                    VALUES(@MaDDH, @MaSP)";
+                    @"INSERT INTO Mua_HOATUOI(DONDATHANGMaDDH, HOATUOIMaHT, DonGia, SoLuong)
+                    VALUES(@MaDDH, @MaSP, @DonGia, @SoLuong)";
                 }
-                else
+                else if (SP.LoaiSP == "SPQT")
                 {
                     command.CommandText =
                     @"INSERT INTO Mua_SPQT(DONDATHANGMaDDH, SANPHAMQUATANGMaSPQT, DonGia, SoLuong)
                     VALUES(@MaDDH, @MaSP, @DonGia, @SoLuong)";
                 }
-                
+                else
+                {
+                    command.CommandText =
+                    @"INSERT INTO Mua_SPMK(DONDATHANGMaDDH, SANPHAMMUAKEMMaSPMK, DonGia, SoLuong)
+                    VALUES(@MaDDH, @MaSP, @DonGia, @SoLuong)";
+                }
                 command.Parameters.AddWithValue("@MaDDH", MaDDH);
                 command.Parameters.AddWithValue("@MaSP", SP.MaSP);
                 command.Parameters.AddWithValue("@DonGia", SP.GiaBan);
@@ -132,12 +122,14 @@ namespace HoaYeuThuong
 
                 insert_cmd.Connection = connection;
                 insert_cmd.Transaction = transaction;
-
+                
                 try
                 {
                     insert_cmd.CommandText =
-                    @"INSERT INTO DONDATHANG (TinhTrangDH, CHINHANHMaCN, HoTenNM, SdtNM, EmailNM, DiaChiNM, HoTenNN, SdtNN, SoNhaNN, QuanNN, ThanhPhoNN, ThoiGianGiao, HTThanhToan, PhiVanChuyen, TinhTrangTT)
-                    VALUES(N'Đã tiếp nhận', NULL, @HoTenNM, @SdtNM, @EmailNM, @DiaChiNM, @HoTenNN, @SdtNN, @SoNhaNN, @QuanNN, @ThanhPhoNN, @ThoiGianGiao, @HTThanhToan, @PhiVanChuyen, N'Chưa thanh toán'); SELECT SCOPE_IDENTITY();";
+                    @"INSERT INTO DONDATHANG (TinhTrangDH, CHINHANHMaCN, HoTenNM, SdtNM, EmailNM, DiaChiNM, HoTenNN, SdtNN, SoNhaNN, QuanNN, ThanhPhoNN, ThoiGianGiao, HTThanhToan, PhiVanChuyen, TinhTrangTT, TongTien)
+                    VALUES(N'Đã tiếp nhận', NULL, @HoTenNM, @SdtNM, @EmailNM, @DiaChiNM, @HoTenNN, @SdtNN, @SoNhaNN, @QuanNN, @ThanhPhoNN, @ThoiGianGiao, @HTThanhToan, @PhiVanChuyen, N'Chưa thanh toán', @TongTien); SELECT SCOPE_IDENTITY();";
+
+                    long TongTien = TinhTongTien_SpTrongGio();
 
                     insert_cmd.Parameters.AddWithValue("@HoTenNM", HoTenNM);
                     insert_cmd.Parameters.AddWithValue("@SdtNM", SdtNM);
@@ -152,12 +144,14 @@ namespace HoaYeuThuong
                     insert_cmd.Parameters.AddWithValue("@ThoiGianGiao", dateTime);
                     insert_cmd.Parameters.AddWithValue("@HTThanhToan", HTThanhToan);
                     insert_cmd.Parameters.AddWithValue("@PhiVanChuyen", PhiVanChuyen);
+                    insert_cmd.Parameters.AddWithValue("@TongTien", TongTien);
+
 
                     int newDDH = Convert.ToInt32(insert_cmd.ExecuteScalar());
 
                     Them_CTDDH(connection, transaction, newDDH);
                     transaction.Commit();
-                    MessageBox.Show("Đặt hàng thành công.", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Đặt hàng thành công. Mã đơn hàng của bạn: " + newDDH.ToString(), "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 catch (Exception ex)
                 {
@@ -176,6 +170,28 @@ namespace HoaYeuThuong
         //TIPS: Thêm các điều kiện ràng buộc thông tin vào hàm này
         private bool KiemTra_ThongTinDatHang_HopLe()
         {
+            String HoTenNM = HoTenNmInput.Text;
+            String SdtNM = SdtNmInput.Text;
+            String EmailNM = EmailNmInput.Text;
+            String DiaChiNM = DiaChiNmInput.Text;
+            String HTThanhToan = HinhThucTTInput.SelectedItem.ToString();
+            String Voucher = VoucherInput.Text;
+            String LoiNhanCH = LoiNhanCHInput.Text;
+
+            String HoTenNN = HoTenNnInput.Text;
+            String SdtNN = SdtNnInput.Text;
+            String SoNhaNN = SoNhaNnInput.Text;
+            String QuanNN = QuanNnInput.Text;
+            String ThanhPhoNN = ThanhPhoNnInput.Text;
+            String LoiNhanNN = LoiNhanNNInput.Text;
+            String ThoiGianGiao = ThoiGianGiaoInput.Text;
+
+            if (String.IsNullOrEmpty(HoTenNM) || String.IsNullOrEmpty(SdtNM) || String.IsNullOrEmpty(EmailNM) || String.IsNullOrEmpty(DiaChiNM) || String.IsNullOrEmpty(HTThanhToan) 
+                || String.IsNullOrEmpty(HoTenNN) || String.IsNullOrEmpty(SdtNN) || String.IsNullOrEmpty(SoNhaNN) || String.IsNullOrEmpty(QuanNN) || String.IsNullOrEmpty(ThanhPhoNN) || String.IsNullOrEmpty(ThoiGianGiao))
+            {
+                MessageBox.Show("Thông tin không đầy đủ, xin hãy điền đầy đủ các ô bắt buộc.\n\n", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
             for (var i = 0; i < sanPhamBindingSource.List.Count; i++)
             {
                 String SoLuongStr = GioHangView.Rows[i].Cells["SL"].Value.ToString();
@@ -212,6 +228,11 @@ namespace HoaYeuThuong
 
         private void Cart_Load(object sender, EventArgs e)
         {
+            for (var i = 0; i < sanPhamBindingSource.List.Count; i++)
+            {
+                GioHangView.Rows[i].Cells["SL"].Value = "1";
+            }
+
             TongTienLabel.Text = "Tổng tiền: " + TinhTongTien_SpTrongGio().ToString();
         }
 

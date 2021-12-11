@@ -29,8 +29,13 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.GioHangView = new System.Windows.Forms.DataGridView();
+            this.maSPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tenSPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.giaBanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SL = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.loaiSPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.XoaSP = new System.Windows.Forms.DataGridViewButtonColumn();
             this.sanPhamBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.DatHangButton = new System.Windows.Forms.Button();
             this.ThongTinLabel = new System.Windows.Forms.Label();
@@ -65,12 +70,6 @@
             this.VoucherInput = new System.Windows.Forms.TextBox();
             this.PhiVCLabel = new System.Windows.Forms.Label();
             this.TongTienLabel = new System.Windows.Forms.Label();
-            this.maSPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.tenSPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.giaBanDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SL = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.loaiSPDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.XoaSP = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.GioHangView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sanPhamBindingSource)).BeginInit();
             this.SuspendLayout();
@@ -95,6 +94,46 @@
             this.GioHangView.TabIndex = 0;
             this.GioHangView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.GioHangView_CellContentClick);
             this.GioHangView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.GioHangView_CellValueChanged);
+            // 
+            // maSPDataGridViewTextBoxColumn
+            // 
+            this.maSPDataGridViewTextBoxColumn.DataPropertyName = "MaSP";
+            this.maSPDataGridViewTextBoxColumn.HeaderText = "Mã SP";
+            this.maSPDataGridViewTextBoxColumn.Name = "maSPDataGridViewTextBoxColumn";
+            this.maSPDataGridViewTextBoxColumn.ReadOnly = true;
+            this.maSPDataGridViewTextBoxColumn.Visible = false;
+            // 
+            // tenSPDataGridViewTextBoxColumn
+            // 
+            this.tenSPDataGridViewTextBoxColumn.DataPropertyName = "TenSP";
+            this.tenSPDataGridViewTextBoxColumn.HeaderText = "Tên sản phẩm";
+            this.tenSPDataGridViewTextBoxColumn.Name = "tenSPDataGridViewTextBoxColumn";
+            this.tenSPDataGridViewTextBoxColumn.ReadOnly = true;
+            this.tenSPDataGridViewTextBoxColumn.Width = 150;
+            // 
+            // giaBanDataGridViewTextBoxColumn
+            // 
+            this.giaBanDataGridViewTextBoxColumn.DataPropertyName = "GiaBan";
+            this.giaBanDataGridViewTextBoxColumn.HeaderText = "Giá bán";
+            this.giaBanDataGridViewTextBoxColumn.Name = "giaBanDataGridViewTextBoxColumn";
+            this.giaBanDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // SL
+            // 
+            this.SL.HeaderText = "Số lượng";
+            this.SL.Name = "SL";
+            // 
+            // loaiSPDataGridViewTextBoxColumn
+            // 
+            this.loaiSPDataGridViewTextBoxColumn.DataPropertyName = "LoaiSP";
+            this.loaiSPDataGridViewTextBoxColumn.HeaderText = "Loại SP";
+            this.loaiSPDataGridViewTextBoxColumn.Name = "loaiSPDataGridViewTextBoxColumn";
+            this.loaiSPDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // XoaSP
+            // 
+            this.XoaSP.HeaderText = "Xóa";
+            this.XoaSP.Name = "XoaSP";
             // 
             // sanPhamBindingSource
             // 
@@ -132,18 +171,18 @@
             this.HoTenNmLabel.AutoSize = true;
             this.HoTenNmLabel.Location = new System.Drawing.Point(460, 31);
             this.HoTenNmLabel.Name = "HoTenNmLabel";
-            this.HoTenNmLabel.Size = new System.Drawing.Size(101, 15);
+            this.HoTenNmLabel.Size = new System.Drawing.Size(107, 15);
             this.HoTenNmLabel.TabIndex = 5;
-            this.HoTenNmLabel.Text = "Họ tên người mua";
+            this.HoTenNmLabel.Text = "Họ tên người mua*";
             // 
             // SdtNmLabel
             // 
             this.SdtNmLabel.AutoSize = true;
             this.SdtNmLabel.Location = new System.Drawing.Point(460, 71);
             this.SdtNmLabel.Name = "SdtNmLabel";
-            this.SdtNmLabel.Size = new System.Drawing.Size(86, 15);
+            this.SdtNmLabel.Size = new System.Drawing.Size(92, 15);
             this.SdtNmLabel.TabIndex = 7;
-            this.SdtNmLabel.Text = "SĐT người mua";
+            this.SdtNmLabel.Text = "SĐT người mua*";
             // 
             // SdtNmInput
             // 
@@ -157,9 +196,9 @@
             this.EmailNmLabel.AutoSize = true;
             this.EmailNmLabel.Location = new System.Drawing.Point(460, 112);
             this.EmailNmLabel.Name = "EmailNmLabel";
-            this.EmailNmLabel.Size = new System.Drawing.Size(94, 15);
+            this.EmailNmLabel.Size = new System.Drawing.Size(100, 15);
             this.EmailNmLabel.TabIndex = 9;
-            this.EmailNmLabel.Text = "Email người mua";
+            this.EmailNmLabel.Text = "Email người mua*";
             // 
             // EmailNmInput
             // 
@@ -171,7 +210,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(858, 0);
+            this.label3.Location = new System.Drawing.Point(854, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(74, 15);
             this.label3.TabIndex = 12;
@@ -180,15 +219,15 @@
             // EmailNnLabel
             // 
             this.EmailNnLabel.AutoSize = true;
-            this.EmailNnLabel.Location = new System.Drawing.Point(858, 110);
+            this.EmailNnLabel.Location = new System.Drawing.Point(854, 110);
             this.EmailNnLabel.Name = "EmailNnLabel";
-            this.EmailNnLabel.Size = new System.Drawing.Size(89, 15);
+            this.EmailNnLabel.Size = new System.Drawing.Size(95, 15);
             this.EmailNnLabel.TabIndex = 18;
-            this.EmailNnLabel.Text = "Số nhà + đường";
+            this.EmailNnLabel.Text = "Số nhà + đường*";
             // 
             // SoNhaNnInput
             // 
-            this.SoNhaNnInput.Location = new System.Drawing.Point(965, 107);
+            this.SoNhaNnInput.Location = new System.Drawing.Point(971, 109);
             this.SoNhaNnInput.Name = "SoNhaNnInput";
             this.SoNhaNnInput.Size = new System.Drawing.Size(221, 22);
             this.SoNhaNnInput.TabIndex = 17;
@@ -196,15 +235,15 @@
             // SdtNnLabel
             // 
             this.SdtNnLabel.AutoSize = true;
-            this.SdtNnLabel.Location = new System.Drawing.Point(858, 69);
+            this.SdtNnLabel.Location = new System.Drawing.Point(854, 69);
             this.SdtNnLabel.Name = "SdtNnLabel";
-            this.SdtNnLabel.Size = new System.Drawing.Size(90, 15);
+            this.SdtNnLabel.Size = new System.Drawing.Size(96, 15);
             this.SdtNnLabel.TabIndex = 16;
-            this.SdtNnLabel.Text = "SĐT người nhận";
+            this.SdtNnLabel.Text = "SĐT người nhận*";
             // 
             // SdtNnInput
             // 
-            this.SdtNnInput.Location = new System.Drawing.Point(965, 66);
+            this.SdtNnInput.Location = new System.Drawing.Point(971, 68);
             this.SdtNnInput.Name = "SdtNnInput";
             this.SdtNnInput.Size = new System.Drawing.Size(221, 22);
             this.SdtNnInput.TabIndex = 15;
@@ -212,15 +251,15 @@
             // HoTenNnLabel
             // 
             this.HoTenNnLabel.AutoSize = true;
-            this.HoTenNnLabel.Location = new System.Drawing.Point(858, 29);
+            this.HoTenNnLabel.Location = new System.Drawing.Point(854, 29);
             this.HoTenNnLabel.Name = "HoTenNnLabel";
-            this.HoTenNnLabel.Size = new System.Drawing.Size(105, 15);
+            this.HoTenNnLabel.Size = new System.Drawing.Size(111, 15);
             this.HoTenNnLabel.TabIndex = 14;
-            this.HoTenNnLabel.Text = "Họ tên người nhận";
+            this.HoTenNnLabel.Text = "Họ tên người nhận*";
             // 
             // HoTenNnInput
             // 
-            this.HoTenNnInput.Location = new System.Drawing.Point(965, 26);
+            this.HoTenNnInput.Location = new System.Drawing.Point(971, 28);
             this.HoTenNnInput.Name = "HoTenNnInput";
             this.HoTenNnInput.Size = new System.Drawing.Size(221, 22);
             this.HoTenNnInput.TabIndex = 13;
@@ -230,9 +269,9 @@
             this.DiaChiNmLabel.AutoSize = true;
             this.DiaChiNmLabel.Location = new System.Drawing.Point(460, 154);
             this.DiaChiNmLabel.Name = "DiaChiNmLabel";
-            this.DiaChiNmLabel.Size = new System.Drawing.Size(101, 15);
+            this.DiaChiNmLabel.Size = new System.Drawing.Size(107, 15);
             this.DiaChiNmLabel.TabIndex = 20;
-            this.DiaChiNmLabel.Text = "Địa chỉ người mua";
+            this.DiaChiNmLabel.Text = "Địa chỉ người mua*";
             // 
             // DiaChiNmInput
             // 
@@ -244,15 +283,15 @@
             // QuanNnLabel
             // 
             this.QuanNnLabel.AutoSize = true;
-            this.QuanNnLabel.Location = new System.Drawing.Point(858, 151);
+            this.QuanNnLabel.Location = new System.Drawing.Point(854, 151);
             this.QuanNnLabel.Name = "QuanNnLabel";
-            this.QuanNnLabel.Size = new System.Drawing.Size(36, 15);
+            this.QuanNnLabel.Size = new System.Drawing.Size(42, 15);
             this.QuanNnLabel.TabIndex = 22;
-            this.QuanNnLabel.Text = "Quận";
+            this.QuanNnLabel.Text = "Quận*";
             // 
             // QuanNnInput
             // 
-            this.QuanNnInput.Location = new System.Drawing.Point(965, 148);
+            this.QuanNnInput.Location = new System.Drawing.Point(971, 150);
             this.QuanNnInput.Name = "QuanNnInput";
             this.QuanNnInput.Size = new System.Drawing.Size(221, 22);
             this.QuanNnInput.TabIndex = 21;
@@ -260,15 +299,15 @@
             // ThanhPhoNnLabel
             // 
             this.ThanhPhoNnLabel.AutoSize = true;
-            this.ThanhPhoNnLabel.Location = new System.Drawing.Point(858, 191);
+            this.ThanhPhoNnLabel.Location = new System.Drawing.Point(854, 191);
             this.ThanhPhoNnLabel.Name = "ThanhPhoNnLabel";
-            this.ThanhPhoNnLabel.Size = new System.Drawing.Size(64, 15);
+            this.ThanhPhoNnLabel.Size = new System.Drawing.Size(70, 15);
             this.ThanhPhoNnLabel.TabIndex = 24;
-            this.ThanhPhoNnLabel.Text = "Thành phố";
+            this.ThanhPhoNnLabel.Text = "Thành phố*";
             // 
             // ThanhPhoNnInput
             // 
-            this.ThanhPhoNnInput.Location = new System.Drawing.Point(965, 188);
+            this.ThanhPhoNnInput.Location = new System.Drawing.Point(971, 190);
             this.ThanhPhoNnInput.Name = "ThanhPhoNnInput";
             this.ThanhPhoNnInput.Size = new System.Drawing.Size(221, 22);
             this.ThanhPhoNnInput.TabIndex = 23;
@@ -277,15 +316,15 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(858, 233);
+            this.label2.Location = new System.Drawing.Point(854, 233);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(80, 15);
+            this.label2.Size = new System.Drawing.Size(86, 15);
             this.label2.TabIndex = 26;
-            this.label2.Text = "Thời gian giao";
+            this.label2.Text = "Thời gian giao*";
             // 
             // ThoiGianGiaoInput
             // 
-            this.ThoiGianGiaoInput.Location = new System.Drawing.Point(965, 230);
+            this.ThoiGianGiaoInput.Location = new System.Drawing.Point(971, 232);
             this.ThoiGianGiaoInput.Mask = "00/00/0000 90:00";
             this.ThoiGianGiaoInput.Name = "ThoiGianGiaoInput";
             this.ThoiGianGiaoInput.Size = new System.Drawing.Size(221, 22);
@@ -311,7 +350,7 @@
             // 
             // LoiNhanNNInput
             // 
-            this.LoiNhanNNInput.Location = new System.Drawing.Point(965, 279);
+            this.LoiNhanNNInput.Location = new System.Drawing.Point(971, 281);
             this.LoiNhanNNInput.Name = "LoiNhanNNInput";
             this.LoiNhanNNInput.Size = new System.Drawing.Size(221, 96);
             this.LoiNhanNNInput.TabIndex = 32;
@@ -319,7 +358,7 @@
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(858, 279);
+            this.label5.Location = new System.Drawing.Point(854, 279);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(86, 96);
             this.label5.TabIndex = 31;
@@ -380,48 +419,6 @@
             this.TongTienLabel.Size = new System.Drawing.Size(240, 29);
             this.TongTienLabel.TabIndex = 38;
             this.TongTienLabel.Text = "Tổng tiền:";
-            // 
-            // maSPDataGridViewTextBoxColumn
-            // 
-            this.maSPDataGridViewTextBoxColumn.DataPropertyName = "MaSP";
-            this.maSPDataGridViewTextBoxColumn.HeaderText = "Mã SP";
-            this.maSPDataGridViewTextBoxColumn.Name = "maSPDataGridViewTextBoxColumn";
-            this.maSPDataGridViewTextBoxColumn.ReadOnly = true;
-            this.maSPDataGridViewTextBoxColumn.Visible = false;
-            // 
-            // tenSPDataGridViewTextBoxColumn
-            // 
-            this.tenSPDataGridViewTextBoxColumn.DataPropertyName = "TenSP";
-            this.tenSPDataGridViewTextBoxColumn.HeaderText = "Tên sản phẩm";
-            this.tenSPDataGridViewTextBoxColumn.Name = "tenSPDataGridViewTextBoxColumn";
-            this.tenSPDataGridViewTextBoxColumn.ReadOnly = true;
-            this.tenSPDataGridViewTextBoxColumn.Width = 150;
-            // 
-            // giaBanDataGridViewTextBoxColumn
-            // 
-            this.giaBanDataGridViewTextBoxColumn.DataPropertyName = "GiaBan";
-            this.giaBanDataGridViewTextBoxColumn.HeaderText = "Giá bán";
-            this.giaBanDataGridViewTextBoxColumn.Name = "giaBanDataGridViewTextBoxColumn";
-            this.giaBanDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // SL
-            // 
-            dataGridViewCellStyle1.NullValue = "1";
-            this.SL.DefaultCellStyle = dataGridViewCellStyle1;
-            this.SL.HeaderText = "Số lượng";
-            this.SL.Name = "SL";
-            // 
-            // loaiSPDataGridViewTextBoxColumn
-            // 
-            this.loaiSPDataGridViewTextBoxColumn.DataPropertyName = "LoaiSP";
-            this.loaiSPDataGridViewTextBoxColumn.HeaderText = "Loại SP";
-            this.loaiSPDataGridViewTextBoxColumn.Name = "loaiSPDataGridViewTextBoxColumn";
-            this.loaiSPDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // XoaSP
-            // 
-            this.XoaSP.HeaderText = "Xóa";
-            this.XoaSP.Name = "XoaSP";
             // 
             // Cart
             // 
