@@ -66,6 +66,12 @@
     <Compile Include="SearchSPMK.Designer.cs">
       <DependentUpon>SearchSPMK.cs</DependentUpon>
     </Compile>
+    <Compile Include="SearchHT.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchHT.Designer.cs">
+      <DependentUpon>SearchHT.cs</DependentUpon>
+    </Compile>
     <Compile Include="SearchSPQT.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -95,6 +101,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SearchSPMK.resx">
       <DependentUpon>SearchSPMK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchHT.resx">
+      <DependentUpon>SearchHT.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchSPQT.resx">
       <DependentUpon>SearchSPQT.cs</DependentUpon>

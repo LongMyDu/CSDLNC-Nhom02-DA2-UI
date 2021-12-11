@@ -16,6 +16,7 @@ namespace HoaYeuThuong
         HashSet<SanPham> GioHang = new HashSet<SanPham>();
         SearchSPQT SPQT_Form = null;
         SearchSPMK SPMK_Form = null;
+        SearchHT HT_Form = null;
         Cart GioHang_Form = null;
 
         string strCon = @"Data Source=DESKTOP-MNUAD46\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
@@ -69,6 +70,16 @@ namespace HoaYeuThuong
                 }
             }
 
+            // Nếu đã mở SearchHT và có thêm sản phẩm thì thêm những sản phẩm trong đó vào giỏ hàng chính
+            if (HT_Form != null && HT_Form.SpDuocThemVaoGio != null)
+            {
+                // Thêm các sản phẩm đã được thêm vào giỏ lúc khách hàng mở SearchSPQT Form vào giỏ hàng chính 
+                foreach (var SP in HT_Form.SpDuocThemVaoGio)
+                {
+                    GioHang.Add(SP);
+                }
+            }
+
             // Nếu đã mở SearchSPMK và có thêm sản phẩm thì thêm những sản phẩm trong đó vào giỏ hàng chính
             if (SPMK_Form != null && SPMK_Form.SpDuocThemVaoGio != null)
             {
@@ -102,6 +113,16 @@ namespace HoaYeuThuong
                 SPMK_Form = new SearchSPMK();
             }
             SPMK_Form.Show();
+        }
+
+        private void GoToHT_Click(object sender, EventArgs e)
+        {
+            // Mở form SearchHT, nếu chưa tồn tại hoặc đã bị tắt thì tạo form mới
+            if (HT_Form == null || HT_Form.IsDisposed == true)
+            {
+                HT_Form = new SearchHT();
+            }
+            HT_Form.Show();
         }
     }
 }
