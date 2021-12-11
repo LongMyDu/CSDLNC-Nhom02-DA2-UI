@@ -11,7 +11,7 @@ select * from PHIEUNHANHANG
 select * from Nhan_hoatuoi
 select count(*) from dondathang
  
-
+select * from SANPHAMQUATANG
 select * from MUA_SPQT
 INSERT INTO PHIEUNHANHANG (NgayNhan)
 VALUES ('10-04-2020')

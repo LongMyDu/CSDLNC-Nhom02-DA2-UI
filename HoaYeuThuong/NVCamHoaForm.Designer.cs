@@ -1,6 +1,6 @@
 ﻿namespace HoaYeuThuong
 {
-    partial class NVCamHoa
+    partial class NVCamHoaForm
     {
         /// <summary>
         /// Required designer variable.
@@ -337,7 +337,6 @@
             // 
             // nVCamHoaViewDonDatHangBindingSource
             // 
-            this.nVCamHoaViewDonDatHangBindingSource.DataSource = typeof(HoaYeuThuong.NVCamHoaView_DonDatHang);
             // 
             // LMDForm
             // 
