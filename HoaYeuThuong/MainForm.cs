@@ -15,9 +15,10 @@ namespace HoaYeuThuong
     {
         HashSet<SanPham> GioHang = new HashSet<SanPham>();
         SearchSPQT SPQT_Form = null;
+        SearchSPMK SPMK_Form = null;
         Cart GioHang_Form = null;
 
-        string strCon = @"Data Source=DESKTOP-R6PKTGC\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
+        string strCon = @"Data Source=DESKTOP-MNUAD46\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
         SqlConnection sqlCon = null;
 
         public MainForm()
@@ -58,16 +59,31 @@ namespace HoaYeuThuong
 
         private void ViewCartButton_Click(object sender, EventArgs e)
         {
-            if (SPQT_Form.SpDuocThemVaoGio == null)
+            // Nếu đã mở SearchSPQT và có thêm sản phẩm thì thêm những sản phẩm trong đó vào giỏ hàng chính
+            if (SPQT_Form != null && SPQT_Form.SpDuocThemVaoGio != null)
+            {
+                // Thêm các sản phẩm đã được thêm vào giỏ lúc khách hàng mở SearchSPQT Form vào giỏ hàng chính 
+                foreach (var SP in SPQT_Form.SpDuocThemVaoGio)
+                {
+                    GioHang.Add(SP);
+                }
+            }
+
+            // Nếu đã mở SearchSPMK và có thêm sản phẩm thì thêm những sản phẩm trong đó vào giỏ hàng chính
+            if (SPMK_Form != null && SPMK_Form.SpDuocThemVaoGio != null)
+            {
+                // Thêm các sản phẩm đã được thêm vào giỏ lúc khách hàng mở SearchSPMK Form vào giỏ hàng chính 
+                foreach (var SP in SPMK_Form.SpDuocThemVaoGio)
+                {
+                    GioHang.Add(SP);
+                }
+            }
+
+            // Nếu giỏ hàng không có sản phẩm nào thì báo lỗi
+            if (GioHang.Count == 0)
             {
                 MessageBox.Show("Giỏ hàng trống.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
-
-            // Thêm các sản phẩm đã được thêm vào giỏ lúc khách hàng mở SearchSPQT Form vào giỏ hàng chính 
-            foreach (var SP in SPQT_Form.SpDuocThemVaoGio)
-            {
-                GioHang.Add(SP);
             }
 
             // Mở form Cart, nếu chưa tồn tại hoặc đã bị tắt thì tạo form mới
@@ -76,6 +92,16 @@ namespace HoaYeuThuong
                 GioHang_Form = new Cart(strCon, GioHang);
             }
             GioHang_Form.Show();
+        }
+
+        private void GoToSPMK_Click(object sender, EventArgs e)
+        {
+            // Mở form Search SPQT, nếu chưa tồn tại hoặc đã bị tắt thì tạo form mới
+            if (SPMK_Form == null || SPMK_Form.IsDisposed == true)
+            {
+                SPMK_Form = new SearchSPMK();
+            }
+            SPMK_Form.Show();
         }
     }
 }

@@ -30,13 +30,15 @@
         {
             this.GoToSPQT = new System.Windows.Forms.Button();
             this.ViewCartButton = new System.Windows.Forms.Button();
+            this.GoToSPMK = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // GoToSPQT
             // 
-            this.GoToSPQT.Location = new System.Drawing.Point(132, 41);
+            this.GoToSPQT.Location = new System.Drawing.Point(176, 50);
+            this.GoToSPQT.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.GoToSPQT.Name = "GoToSPQT";
-            this.GoToSPQT.Size = new System.Drawing.Size(174, 23);
+            this.GoToSPQT.Size = new System.Drawing.Size(232, 28);
             this.GoToSPQT.TabIndex = 0;
             this.GoToSPQT.Text = "Tìm sản phẩm";
             this.GoToSPQT.UseVisualStyleBackColor = true;
@@ -44,21 +46,34 @@
             // 
             // ViewCartButton
             // 
-            this.ViewCartButton.Location = new System.Drawing.Point(144, 157);
+            this.ViewCartButton.Location = new System.Drawing.Point(192, 193);
+            this.ViewCartButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ViewCartButton.Name = "ViewCartButton";
-            this.ViewCartButton.Size = new System.Drawing.Size(139, 23);
+            this.ViewCartButton.Size = new System.Drawing.Size(185, 28);
             this.ViewCartButton.TabIndex = 1;
             this.ViewCartButton.Text = "Xem giỏ hàng";
             this.ViewCartButton.UseVisualStyleBackColor = true;
             this.ViewCartButton.Click += new System.EventHandler(this.ViewCartButton_Click);
             // 
+            // GoToSPMK
+            // 
+            this.GoToSPMK.Location = new System.Drawing.Point(176, 105);
+            this.GoToSPMK.Name = "GoToSPMK";
+            this.GoToSPMK.Size = new System.Drawing.Size(232, 28);
+            this.GoToSPMK.TabIndex = 2;
+            this.GoToSPMK.Text = "Tìm sản phẩm mua kèm";
+            this.GoToSPMK.UseVisualStyleBackColor = true;
+            this.GoToSPMK.Click += new System.EventHandler(this.GoToSPMK_Click);
+            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.Controls.Add(this.GoToSPMK);
             this.Controls.Add(this.ViewCartButton);
             this.Controls.Add(this.GoToSPQT);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainForm";
             this.Text = "MainForm";
             this.ResumeLayout(false);
@@ -69,5 +84,6 @@
 
         private System.Windows.Forms.Button GoToSPQT;
         private System.Windows.Forms.Button ViewCartButton;
+        private System.Windows.Forms.Button GoToSPMK;
     }
 }

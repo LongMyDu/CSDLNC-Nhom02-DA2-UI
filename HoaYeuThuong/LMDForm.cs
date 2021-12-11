@@ -13,7 +13,7 @@ namespace HoaYeuThuong
 {
     public partial class LMDForm : Form
     {
-        string strCon = @"Data Source=DESKTOP-R6PKTGC\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
+        string strCon = @"Data Source=DESKTOP-MNUAD46\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
         SqlConnection sqlCon = null;
         string MaDdhHienTai;
         public LMDForm()

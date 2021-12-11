@@ -11,7 +11,7 @@ using System.Data.SqlClient;
 
 namespace HoaYeuThuong
 {
-    public partial class SearchSPQT : Form
+    public partial class SearchSPMK : Form
     {
         public HashSet<SanPham> SpDuocThemVaoGio { get; }
 
@@ -21,56 +21,23 @@ namespace HoaYeuThuong
         // Connection object
         SqlConnection sqlCon = null;
         string searchText = "";
-        int themeID = 0;
-        int colorID = 0;
         int moneyFrom = 0;
         int moneyTo = 0;
 
-        
-        public SearchSPQT()
+        public SearchSPMK()
         {
             InitializeComponent();
             SpDuocThemVaoGio = new HashSet<SanPham>();
         }
 
-        private void LoadColor()
+        private void LoadAllSPMK()
         {
-            string query = @"SELECT * FROM MAUSAC";
-            DataSet ds = RetrieveData(query);
-            DataRow row = ds.Tables[0].NewRow();
-            row["MaMau"] = 0;
-            row["TenMau"] = "--Màu sắc--";
-            ds.Tables[0].Rows.InsertAt(row, 0);
-
-            //set the ColorFilter control's data source/data table
-            ColorFilter.DataSource = ds.Tables[0];
-            ColorFilter.DisplayMember = "TenMau";
-            ColorFilter.ValueMember = "MaMau";
+            string query = @"SELECT SPMK.MaSPMK, SPMK.TenSPMK, SPMK.MieuTaSPMK, SPMK.GiaBan, DT.TenDT
+            FROM SANPHAMMUAKEM SPMK JOIN DOITAC DT ON (SPMK.DOITACMaDT = DT.MaDT)";
+            LoadSPMK(query);
         }
 
-        private void LoadTheme()
-        {
-            string query = @"SELECT * FROM CHUDE";
-            DataSet ds = RetrieveData(query);
-            DataRow row = ds.Tables[0].NewRow();
-            row["MaCD"] = 0;
-            row["TenCD"] = "--Chủ đề--";
-            ds.Tables[0].Rows.InsertAt(row, 0);
-
-            //set the ColorFilter control's data source/data table
-            ThemeFilter.DataSource = ds.Tables[0];
-            ThemeFilter.DisplayMember = "TenCD";
-            ThemeFilter.ValueMember = "MaCD";
-        }
-
-        private void LoadAllSPQT()
-        {
-            string query = @"SELECT SPQT.MaSPQT, SPQT.TenSPQT, SPQT.MieuTaSPQT, SPQT.GiaBan, SPQT.GiaBanSauGiam, CD.TenCD
-            FROM SANPHAMQUATANG SPQT JOIN CHUDE CD ON (SPQT.CHUDEMaCD = CD.MaCD)";
-            LoadSPQT(query);
-        }
-
-        private void LoadSPQT(string query)
+        private void LoadSPMK(string query)
         {
             DataSet ds = RetrieveData(query);
 
@@ -80,12 +47,11 @@ namespace HoaYeuThuong
 
             //set the DataGridView control's data source/data table
             grdData.DataSource = ds.Tables[0];
-            grdData.Columns["MaSPQT"].DataPropertyName = "MaSPQT";
-            grdData.Columns["TenSPQT"].DataPropertyName = "TenSPQT";
-            grdData.Columns["ChuDe"].DataPropertyName = "TenCD";
-            grdData.Columns["MieuTaSPQT"].DataPropertyName = "MieuTaSPQT";
+            grdData.Columns["MaSPMK"].DataPropertyName = "MaSPMK";
+            grdData.Columns["TenSPMK"].DataPropertyName = "TenSPMK";
+            grdData.Columns["MieuTaSPMK"].DataPropertyName = "MieuTaSPMK";
             grdData.Columns["GiaBan"].DataPropertyName = "GiaBan";
-            grdData.Columns["GiaBanSauGiam"].DataPropertyName = "GiaBanSauGiam";
+            grdData.Columns["DoiTac"].DataPropertyName = "TenDT";
             grdData.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
 
@@ -93,7 +59,7 @@ namespace HoaYeuThuong
         {
             List<string> moneyList = new List<string>();
             moneyList.Add("--Giá tiền thấp nhất--");
-            for (int i = 1; i <= 20; i++)
+            for (int i = 1; i <= 15; i++)
             {
                 moneyList.Add((i * 100000).ToString());
             }    
@@ -101,7 +67,7 @@ namespace HoaYeuThuong
 
             List<string> moneyList2 = new List<string>();
             moneyList2.Add("--Giá tiền cao nhất--");
-            for (int i = 1; i <= 20; i++)
+            for (int i = 1; i <= 15; i++)
             {
                 moneyList2.Add((i * 100000).ToString());
             }
@@ -159,56 +125,26 @@ namespace HoaYeuThuong
 
         private void GQForm_Load(object sender, EventArgs e)
         {
-            LoadColor();
-            LoadTheme();
-            LoadAllSPQT();
+            LoadAllSPMK();
             LoadMoney();
         }
 
         private void SearchButton_Click(object sender, EventArgs e)
         {
             string condition = "WHERE";
-            string query = null;
-            bool isJoin = false;
+            string query = @"SELECT SPMK.MaSPMK, SPMK.TenSPMK, SPMK.MieuTaSPMK, SPMK.GiaBan, DT.TenDT
+            FROM SANPHAMMUAKEM SPMK JOIN DOITAC DT ON (SPMK.DOITACMaDT = DT.MaDT)
+            ";
             // if user enter search keyword
             if (!String.Equals(searchText, ""))
             {
-                condition = condition + " " + "SPQT.TenSPQT LIKE '%" + searchText + "%'";
-            }
-
-            // if user use color filter
-            if (colorID != 0)
-            {
-                isJoin = true;
-                string getColor = "HT.MAUSACMaMau = " + colorID.ToString();
-                if (String.Equals(condition, "WHERE"))
-                {
-                    condition = condition + " " + getColor;
-                }
-                else
-                {
-                    condition = condition + " AND " + getColor;
-                }    
-            }
-
-            // if user use theme filter
-            if (themeID != 0)
-            {
-                string getTheme = "SPQT.CHUDEMaCD = " + themeID.ToString();
-                if (String.Equals(condition, "WHERE"))
-                {
-                    condition = condition + " " + getTheme;
-                }
-                else
-                {
-                    condition = condition + " AND " + getTheme;
-                }
+                condition = condition + " " + "SPMK.TenSPMK LIKE '%" + searchText + "%'";
             }
 
             // if user use money filter
             if (moneyFrom != 0)
             {
-                string minMoney = "SPQT.GiaBan >= " + moneyFrom.ToString();
+                string minMoney = "SPMK.GiaBan >= " + moneyFrom.ToString();
                 if (String.Equals(condition, "WHERE"))
                 {
                     condition = condition + " " + minMoney;
@@ -221,7 +157,7 @@ namespace HoaYeuThuong
 
             if (moneyTo != 0)
             {
-                string maxMoney = "SPQT.GiaBan <= " + moneyTo.ToString();
+                string maxMoney = "SPMK.GiaBan <= " + moneyTo.ToString();
                 if (String.Equals(condition, "WHERE"))
                 {
                     condition = condition + " " + maxMoney;
@@ -232,40 +168,16 @@ namespace HoaYeuThuong
                 }
             }
 
-            // if user use color filter, we have to join multiple tables
-            if (!isJoin)
-            {
-                query = @"SELECT SPQT.MaSPQT, SPQT.TenSPQT, SPQT.MieuTaSPQT, SPQT.GiaBan, SPQT.GiaBanSauGiam, CD.TenCD
-                FROM SANPHAMQUATANG SPQT JOIN CHUDE CD ON (SPQT.CHUDEMaCD = CD.MaCD)
-                ";
-            }
-            else
-            {
-                query = @"SELECT SPQT.MaSPQT, SPQT.TenSPQT, SPQT.MieuTaSPQT, SPQT.GiaBan, SPQT.GiaBanSauGiam, CD.TenCD
-                FROM SANPHAMQUATANG SPQT JOIN HOATUOI_SPQT HS ON (SPQT.MaSPQT = HS.SANPHAMQUATANGMaSPQT) JOIN HOATUOI HT ON (HS.HOATUOIMaHT = HT.MaHT) JOIN CHUDE CD ON (SPQT.CHUDEMaCD = CD.MaCD)
-                ";
-            }
-            
             if (!String.Equals(condition, "WHERE"))
             {
                 query += condition;
             }
-            LoadSPQT(query);
+            LoadSPMK(query);
         }
 
         private void SearchBar_TextChanged(object sender, EventArgs e)
         {
             searchText = SearchBar.Text;
-        }
-
-        private void ColorFilter_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            colorID = ColorFilter.SelectedIndex;
-        }
-
-        private void ThemeFilter_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            themeID = ThemeFilter.SelectedIndex;
         }
 
         private void MoneyFrom_SelectedIndexChanged(object sender, EventArgs e)
@@ -283,10 +195,10 @@ namespace HoaYeuThuong
             //when the add to cart button is clicked
             if (grdData.Columns[e.ColumnIndex].Name == "AddToCartButton")
             {
-                String MaSpHienTai = grdData.Rows[e.RowIndex].Cells["MaSPQT"].Value.ToString();
-                String GiaBanSpHienTai = grdData.Rows[e.RowIndex].Cells["GiaBanSauGiam"].Value.ToString();
-                String TenSP = grdData.Rows[e.RowIndex].Cells["TenSPQT"].Value.ToString();
-                SpDuocThemVaoGio.Add(new SanPham() { MaSP = MaSpHienTai, GiaBan = GiaBanSpHienTai, TenSP = TenSP, LoaiSP="SPQT" });
+                String MaSpHienTai = grdData.Rows[e.RowIndex].Cells["MaSPMK"].Value.ToString();
+                String GiaBanSpHienTai = grdData.Rows[e.RowIndex].Cells["GiaBan"].Value.ToString();
+                String TenSP = grdData.Rows[e.RowIndex].Cells["TenSPMK"].Value.ToString();
+                SpDuocThemVaoGio.Add(new SanPham() { MaSP = MaSpHienTai, GiaBan = GiaBanSpHienTai, TenSP = TenSP, LoaiSP="SPMK" });
 
                 //String temp = MaSpHienTai + GiaBanSpHienTai + TenSP + "\n\n";
                 //temp += String.Join(", ", SpDuocThemVaoGio[0].TenSP);
