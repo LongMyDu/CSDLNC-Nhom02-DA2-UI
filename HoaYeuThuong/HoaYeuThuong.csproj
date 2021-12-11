@@ -96,7 +96,6 @@
     <Compile Include="MDForm.Designer.cs">
       <DependentUpon>MDForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NVCamHoaView-DonDatHang.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Cart.resx">
