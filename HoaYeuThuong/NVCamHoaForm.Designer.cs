@@ -355,7 +355,7 @@
             // 
             // nVCamHoaViewDonDatHangBindingSource
             // 
-            this.nVCamHoaViewDonDatHangBindingSource.DataSource = typeof(HoaYeuThuong.NVCamHoaView_DonDatHang);
+            // this.nVCamHoaViewDonDatHangBindingSource.DataSource = typeof(HoaYeuThuong.NVCamHoaView_DonDatHang);
             // 
             // NVCamHoaForm
             // 
