@@ -16,7 +16,7 @@ namespace HoaYeuThuong
         public HashSet<SanPham> SpDuocThemVaoGio { get; }
 
         // Connection string (@ represents this is a string)
-        string strCon = @"Data Source=DESKTOP-MNUAD46\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
+        string strCon = theconnection.getconnect() ;
 
         // Connection object
         SqlConnection sqlCon = null;

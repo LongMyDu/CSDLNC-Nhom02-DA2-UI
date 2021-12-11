@@ -9,16 +9,22 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 
+    
+
 namespace HoaYeuThuong
 {
+    public static class theconnection {
+       public static string getconnect() {
+       return @"Data Source=LEOSMAC25A1\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";}
+}
+
     public partial class MainForm : Form
     {
         HashSet<SanPham> GioHang = new HashSet<SanPham>();
         SearchSPQT SPQT_Form = null;
         SearchSPMK SPMK_Form = null;
         Cart GioHang_Form = null;
-
-        string strCon = @"Data Source=DESKTOP-MNUAD46\SQLEXPRESS;Initial Catalog=DB_HoaYeuThuong;Integrated Security=True";
+        string strCon = theconnection.getconnect() ;
         SqlConnection sqlCon = null;
 
         public MainForm()
