@@ -16,7 +16,7 @@ namespace HoaYeuThuong
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new NVCamHoaForm());
+            Application.Run(new MainForm());
         }
     }
 }
