@@ -401,6 +401,7 @@
             this.VoucherInput.Name = "VoucherInput";
             this.VoucherInput.Size = new System.Drawing.Size(221, 22);
             this.VoucherInput.TabIndex = 36;
+            this.VoucherInput.Leave += new System.EventHandler(this.VoucherInput_TextChanged);
             // 
             // PhiVCLabel
             // 

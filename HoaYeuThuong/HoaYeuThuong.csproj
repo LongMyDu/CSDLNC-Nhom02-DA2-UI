@@ -53,17 +53,40 @@
     <Compile Include="Cart.Designer.cs">
       <DependentUpon>Cart.cs</DependentUpon>
     </Compile>
+    <Compile Include="KTDDH.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="KTDDH.Designer.cs">
+      <DependentUpon>KTDDH.cs</DependentUpon>
+    </Compile>
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NhanVienCamHoa.cs">
+    <Compile Include="NVCamHoaForm.cs">
+<<<<<<< HEAD
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NhanVienCamHoa.Designer.cs">
-      <DependentUpon>NhanVienCamHoa.cs</DependentUpon>
+    <Compile Include="NVCamHoaForm.Designer.cs">
+      <DependentUpon>NVCamHoaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NVGiaoHangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+=======
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NVCamHoaForm.Designer.cs">
+      <DependentUpon>NVCamHoaForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NVGiaoHangForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+>>>>>>> 98d3593a2e3f5e3b005febc0ccf3c182584a854f
+    <Compile Include="NVGiaoHangForm.Designer.cs">
+      <DependentUpon>NVGiaoHangForm.cs</DependentUpon>
     </Compile>
     <Compile Include="SanPham.cs" />
     <Compile Include="SearchSPMK.cs">
@@ -90,17 +113,22 @@
     <Compile Include="MDForm.Designer.cs">
       <DependentUpon>MDForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="NVCamHoaView-DonDatHang.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Cart.resx">
       <DependentUpon>Cart.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="KTDDH.resx">
+      <DependentUpon>KTDDH.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NhanVienCamHoa.resx">
-      <DependentUpon>NhanVienCamHoa.cs</DependentUpon>
+    <EmbeddedResource Include="NVCamHoaForm.resx">
+      <DependentUpon>NVCamHoaForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="NVGiaoHangForm.resx">
+      <DependentUpon>NVGiaoHangForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SearchSPMK.resx">
       <DependentUpon>SearchSPMK.cs</DependentUpon>

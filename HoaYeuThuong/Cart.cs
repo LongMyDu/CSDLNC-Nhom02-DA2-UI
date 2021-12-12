@@ -16,6 +16,9 @@ namespace HoaYeuThuong
     {
         
         String sqlConnString;
+        long GiaGiam = 0;
+        String MaVoucher_ThanhCong = null;
+
         public Cart(String sqlConnString, HashSet<SanPham> GioHang)
         {
             InitializeComponent();
@@ -45,7 +48,7 @@ namespace HoaYeuThuong
 
                 TongTien += long.Parse(SP.GiaBan)*SoLuong;
             }
-            return TongTien;
+            return TongTien - GiaGiam;
         }
 
         //Hàm thêm chi tiết đơn hàng dựa trên SPTrongGio, CHƯA catch Exception
@@ -126,8 +129,8 @@ namespace HoaYeuThuong
                 try
                 {
                     insert_cmd.CommandText =
-                    @"INSERT INTO DONDATHANG (TinhTrangDH, CHINHANHMaCN, HoTenNM, SdtNM, EmailNM, DiaChiNM, HoTenNN, SdtNN, SoNhaNN, QuanNN, ThanhPhoNN, ThoiGianGiao, HTThanhToan, PhiVanChuyen, TinhTrangTT, TongTien)
-                    VALUES(N'Đã tiếp nhận', NULL, @HoTenNM, @SdtNM, @EmailNM, @DiaChiNM, @HoTenNN, @SdtNN, @SoNhaNN, @QuanNN, @ThanhPhoNN, @ThoiGianGiao, @HTThanhToan, @PhiVanChuyen, N'Chưa thanh toán', @TongTien); SELECT SCOPE_IDENTITY();";
+                    @"INSERT INTO DONDATHANG (TinhTrangDH, CHINHANHMaCN, HoTenNM, SdtNM, EmailNM, DiaChiNM, HoTenNN, SdtNN, SoNhaNN, QuanNN, ThanhPhoNN, ThoiGianGiao, HTThanhToan, PhiVanChuyen, TinhTrangTT, TongTien, VOUCHERMaVoucher)
+                    VALUES(N'Đã tiếp nhận', NULL, @HoTenNM, @SdtNM, @EmailNM, @DiaChiNM, @HoTenNN, @SdtNN, @SoNhaNN, @QuanNN, @ThanhPhoNN, @ThoiGianGiao, @HTThanhToan, @PhiVanChuyen, N'Chưa thanh toán', @TongTien, @MaVoucher); SELECT SCOPE_IDENTITY();";
 
                     long TongTien = TinhTongTien_SpTrongGio();
 
@@ -145,7 +148,7 @@ namespace HoaYeuThuong
                     insert_cmd.Parameters.AddWithValue("@HTThanhToan", HTThanhToan);
                     insert_cmd.Parameters.AddWithValue("@PhiVanChuyen", PhiVanChuyen);
                     insert_cmd.Parameters.AddWithValue("@TongTien", TongTien);
-
+                    insert_cmd.Parameters.AddWithValue("@MaVoucher", MaVoucher_ThanhCong);
 
                     int newDDH = Convert.ToInt32(insert_cmd.ExecuteScalar());
 
@@ -167,6 +170,34 @@ namespace HoaYeuThuong
             }
         }
         
+        private void Get_Voucher(String MaVoucher)
+        {
+            using (SqlConnection connection = new SqlConnection(sqlConnString))
+            {
+                connection.Open();
+                SqlCommand select_cmd = connection.CreateCommand();
+                select_cmd.CommandText = @"SELECT * FROM VOUCHER WHERE MaVoucher = @MaVoucher";
+                select_cmd.Parameters.AddWithValue("@MaVoucher", MaVoucher);
+
+                SqlDataAdapter da = new SqlDataAdapter(select_cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                if (dt.Rows.Count == 0)
+                {
+                    MessageBox.Show("Đã xảy ra lỗi! Không tìm thấy voucher.\n\n", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
+                int LuotSuDung = int.Parse(dt.Rows[0].ItemArray[1].ToString());
+
+                if (LuotSuDung > 0)
+                {
+                    GiaGiam = long.Parse(dt.Rows[0].ItemArray[2].ToString());
+                    MaVoucher_ThanhCong = MaVoucher;
+                }
+            }
+        }
+
         //TIPS: Thêm các điều kiện ràng buộc thông tin vào hàm này
         private bool KiemTra_ThongTinDatHang_HopLe()
         {
@@ -186,12 +217,13 @@ namespace HoaYeuThuong
             String LoiNhanNN = LoiNhanNNInput.Text;
             String ThoiGianGiao = ThoiGianGiaoInput.Text;
 
-            if (String.IsNullOrEmpty(HoTenNM) || String.IsNullOrEmpty(SdtNM) || String.IsNullOrEmpty(EmailNM) || String.IsNullOrEmpty(DiaChiNM) || String.IsNullOrEmpty(HTThanhToan) 
-                || String.IsNullOrEmpty(HoTenNN) || String.IsNullOrEmpty(SdtNN) || String.IsNullOrEmpty(SoNhaNN) || String.IsNullOrEmpty(QuanNN) || String.IsNullOrEmpty(ThanhPhoNN) || String.IsNullOrEmpty(ThoiGianGiao))
-            {
-                MessageBox.Show("Thông tin không đầy đủ, xin hãy điền đầy đủ các ô bắt buộc.\n\n", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
+            //if (String.IsNullOrEmpty(HoTenNM) || String.IsNullOrEmpty(SdtNM) || String.IsNullOrEmpty(EmailNM) || String.IsNullOrEmpty(DiaChiNM) || String.IsNullOrEmpty(HTThanhToan) 
+            //    || String.IsNullOrEmpty(HoTenNN) || String.IsNullOrEmpty(SdtNN) || String.IsNullOrEmpty(SoNhaNN) || String.IsNullOrEmpty(QuanNN) || String.IsNullOrEmpty(ThanhPhoNN) || String.IsNullOrEmpty(ThoiGianGiao))
+            //{
+            //    MessageBox.Show("Thông tin không đầy đủ, xin hãy điền đầy đủ các ô bắt buộc.\n\n", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //    return false;
+            //}
+
             for (var i = 0; i < sanPhamBindingSource.List.Count; i++)
             {
                 String SoLuongStr = GioHangView.Rows[i].Cells["SL"].Value.ToString();
@@ -207,11 +239,13 @@ namespace HoaYeuThuong
 
         private void DatHangButton_Click(object sender, EventArgs e)
         {
+            if (KiemTra_ThongTinDatHang_HopLe() == false)
+                return;
+            
             DialogResult dr = MessageBox.Show("Xác nhận đặt hàng?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
 
             if (dr == DialogResult.Yes)
             {
-                if (KiemTra_ThongTinDatHang_HopLe())
                     Them_DDH();
             }
         }
@@ -241,6 +275,17 @@ namespace HoaYeuThuong
             if (GioHangView.Columns[e.ColumnIndex].Name == "XoaSP")
             {
                 sanPhamBindingSource.RemoveCurrent();
+                TongTienLabel.Text = "Tổng tiền: " + TinhTongTien_SpTrongGio().ToString();
+            }
+        }
+
+        private void VoucherInput_TextChanged(object sender, EventArgs e)
+        {
+            String Voucher = VoucherInput.Text;
+            if (String.IsNullOrEmpty(Voucher) == false)
+            {
+                Get_Voucher(Voucher);
+
                 TongTienLabel.Text = "Tổng tiền: " + TinhTongTien_SpTrongGio().ToString();
             }
         }
