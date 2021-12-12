@@ -39,6 +39,7 @@
             this.TinhTrang = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NVCamHoa = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NVGiaoHang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TongTien = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -82,7 +83,8 @@
             this.LoiNhanCH,
             this.TinhTrang,
             this.NVCamHoa,
-            this.NVGiaoHang});
+            this.NVGiaoHang,
+            this.TongTien});
             this.dataGridView1.Location = new System.Drawing.Point(31, 68);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
@@ -132,6 +134,12 @@
             this.NVGiaoHang.Name = "NVGiaoHang";
             this.NVGiaoHang.ReadOnly = true;
             // 
+            // TongTien
+            // 
+            this.TongTien.HeaderText = "TongTien";
+            this.TongTien.Name = "TongTien";
+            this.TongTien.ReadOnly = true;
+            // 
             // KTDDH_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -162,5 +170,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TinhTrang;
         private System.Windows.Forms.DataGridViewTextBoxColumn NVCamHoa;
         private System.Windows.Forms.DataGridViewTextBoxColumn NVGiaoHang;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TongTien;
     }
 }

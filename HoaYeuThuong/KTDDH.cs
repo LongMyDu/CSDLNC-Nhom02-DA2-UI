@@ -52,6 +52,7 @@ namespace HoaYeuThuong
             dataGridView1.Columns["TinhTrang"].DataPropertyName = "TinhTrangDH";
             dataGridView1.Columns["NVCamHoa"].DataPropertyName = "NHANVIENCAMHOAMaNV";
             dataGridView1.Columns["NVGiaoHang"].DataPropertyName = "NHANVIENGIAOHANGMaNV";
+            dataGridView1.Columns["TongTien"].DataPropertyName = "TongTien";
             dataGridView1.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
         }
 

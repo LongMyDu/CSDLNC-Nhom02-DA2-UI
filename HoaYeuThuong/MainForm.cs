@@ -171,11 +171,7 @@ namespace HoaYeuThuong
     {
         public static string getconnect()
         {
-<<<<<<< HEAD
             return @"Data Source=LEOSMAC25A1\SQLEXPRESS;Initial Catalog=DB_HOAYEUTHUONG;Integrated Security=True";
-=======
-            return @"Data Source=DESKTOP-R6PKTGC\SQLEXPRESS;Initial Catalog=DB_HOAYEUTHUONG;Integrated Security=True";
->>>>>>> 98d3593a2e3f5e3b005febc0ccf3c182584a854f
         }
     }
 }
