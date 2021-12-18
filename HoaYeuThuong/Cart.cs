@@ -148,7 +148,15 @@ namespace HoaYeuThuong
                     insert_cmd.Parameters.AddWithValue("@HTThanhToan", HTThanhToan);
                     insert_cmd.Parameters.AddWithValue("@PhiVanChuyen", PhiVanChuyen);
                     insert_cmd.Parameters.AddWithValue("@TongTien", TongTien);
-                    insert_cmd.Parameters.AddWithValue("@MaVoucher", MaVoucher_ThanhCong);
+                    // insert_cmd.Parameters.AddWithValue("@MaVoucher", MaVoucher_ThanhCong);
+                    if (MaVoucher_ThanhCong == null)
+                    {
+                        insert_cmd.Parameters.AddWithValue("@MaVoucher", DBNull.Value);
+                    }
+                    else
+                    {
+                        insert_cmd.Parameters.AddWithValue("@MaVoucher", MaVoucher_ThanhCong);
+                    }
 
                     int newDDH = Convert.ToInt32(insert_cmd.ExecuteScalar());
 

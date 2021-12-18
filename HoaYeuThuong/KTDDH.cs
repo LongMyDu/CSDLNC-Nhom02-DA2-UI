@@ -31,9 +31,9 @@ namespace HoaYeuThuong
         private void HienThi_DonHang()
         {
            
-            String querry = @"SELECT MaDDH, HoTenNM, ThoiGianGiao, LoiNhanCH, TinhTrangDH, NHANVIENCAMHOAMaNV, NHANVIENGIAOHANGMaNV FROM DONDATHANG WHERE MaDDH =" + keysearch;
-            querry += "OR SdtNM =" + keysearch;
-            querry += "OR EmailNM =" + keysearch;
+            String querry = @"SELECT MaDDH, HoTenNM, ThoiGianGiao, LoiNhanCH, TinhTrangDH, NHANVIENCAMHOAMaNV, NHANVIENGIAOHANGMaNV, TongTien FROM DONDATHANG WHERE MaDDH =" + keysearch;
+            // querry += "OR SdtNM =" + keysearch;
+            // querry += "OR EmailNM =" + keysearch;
 
 
             SqlDataAdapter sqlDaDH = new SqlDataAdapter(querry, sqlCon);

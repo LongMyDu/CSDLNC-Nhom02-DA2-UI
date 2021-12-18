@@ -20,6 +20,8 @@ namespace HoaYeuThuong
         {
             InitializeComponent();
             ConnectToDB();
+            LTCNComboBox.SelectedItem = null;
+            LTTTComboBox.SelectedItem = null;
         }
 
         private bool ConnectToDB()
@@ -84,19 +86,18 @@ namespace HoaYeuThuong
         private void HienThi_DonHang()
         {
             String MaNVGH = NVGHInput.Value.ToString();
-            String select_cmd = @"SELECT MaDDH, HoTenNN, SdtNN, SoNhaNN, QuanNN, ThanhPhoNN, ThoiGianGiao, PhiVanChuyen, TongTien, TinhTrangTT, TinhTrangDH, NHANVIENGIAOHANGMaNV, CHINHANHMaCN FROM DONDATHANG WHERE ";
-
-            select_cmd += "CHINHANHMaCN = " + MaNVGH;
+            String MaCN = LTCNComboBox.SelectedItem.ToString();
+            String select_cmd = @"SELECT TOP (1000) MaDDH, HoTenNN, SdtNN, SoNhaNN, QuanNN, ThanhPhoNN, ThoiGianGiao, PhiVanChuyen, TongTien, TinhTrangTT, TinhTrangDH, NHANVIENGIAOHANGMaNV, CHINHANHMaCN FROM DONDATHANG WHERE ";
             if (LTTTComboBox.SelectedItem != null)
             {
                 String SelectedText = LTTTComboBox.SelectedItem.ToString();
                 if (SelectedText == @"Tất cả")
                 {
-                    select_cmd += " AND TinhTrangDH != N'Đang giao hàng' AND TinhTrangDH != N'Giao hàng thành công'";
+                    select_cmd += " TinhTrangDH != N'Đang giao hàng' AND TinhTrangDH != N'Giao hàng thành công'";
                 }
                 else
                 {
-                    select_cmd += " AND TinhTrangDH = N'" + SelectedText + @"'";
+                    select_cmd += " TinhTrangDH = N'" + SelectedText + @"'";
                 }
             }
             if (LTCNComboBox.SelectedItem != null)
@@ -104,11 +105,11 @@ namespace HoaYeuThuong
                 String SelectedText = LTTTComboBox.SelectedItem.ToString();
                 if (SelectedText == @"Tất cả")
                 {
-                    select_cmd += "";
+                    select_cmd += " ";
                 }
                 else
                 {
-                    select_cmd += " AND TinhTrangDH = N'" + SelectedText + @"'";
+                    select_cmd += " AND CHINHANHMaCN = " + MaCN;
                 }
             }
 
@@ -116,7 +117,7 @@ namespace HoaYeuThuong
             DataTable dtbDH = new DataTable();
             sqlDaDH.Fill(dtbDH);
 
-            NVGiaoHangView.AutoGenerateColumns = false;
+            NVGiaoHangView.AutoGenerateColumns = true;
             NVGiaoHangView.DataSource = dtbDH;
         }
 
