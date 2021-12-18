@@ -179,7 +179,7 @@
             this.Controls.Add(this.NVGHInput);
             this.Controls.Add(this.NVGiaoHang);
             this.Name = "NVGiaoHangForm";
-            this.Text = "Form1";
+            this.Text = "NVGiaoHang";
             ((System.ComponentModel.ISupportInitialize)(this.NVGHInput)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NVGiaoHangView)).EndInit();
             this.ResumeLayout(false);

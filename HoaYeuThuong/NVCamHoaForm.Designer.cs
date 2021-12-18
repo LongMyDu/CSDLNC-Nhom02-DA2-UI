@@ -353,10 +353,6 @@
             this.TinhTrangCombobox.Size = new System.Drawing.Size(121, 38);
             this.TinhTrangCombobox.TabIndex = 20;
             // 
-            // nVCamHoaViewDonDatHangBindingSource
-            // 
-            // this.nVCamHoaViewDonDatHangBindingSource.DataSource = typeof(HoaYeuThuong.NVCamHoaView_DonDatHang);
-            // 
             // NVCamHoaForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(15F, 30F);
@@ -378,7 +374,7 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "NVCamHoaForm";
-            this.Text = "LMDForm";
+            this.Text = "NVCamHoa";
             ((System.ComponentModel.ISupportInitialize)(this.NVCamHoaView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NVCamHoaViewCT)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NvInput)).EndInit();

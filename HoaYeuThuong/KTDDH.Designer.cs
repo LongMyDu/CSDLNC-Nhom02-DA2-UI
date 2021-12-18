@@ -59,7 +59,6 @@
             this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "MA DDH";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // button1
             // 
@@ -90,7 +89,7 @@
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.Size = new System.Drawing.Size(729, 241);
             this.dataGridView1.TabIndex = 3;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+          
             // 
             // MaDDH
             // 
