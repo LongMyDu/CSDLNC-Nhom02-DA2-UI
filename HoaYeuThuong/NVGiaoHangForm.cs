@@ -102,7 +102,7 @@ namespace HoaYeuThuong
             }
             if (LTCNComboBox.SelectedItem != null)
             {
-                String SelectedText = LTTTComboBox.SelectedItem.ToString();
+                String SelectedText = LTCNComboBox.SelectedItem.ToString();
                 if (SelectedText == @"Tất cả")
                 {
                     select_cmd += " ";
